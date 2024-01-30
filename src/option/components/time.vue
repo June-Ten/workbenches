@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import codeedit from '../../page/group/code';
+import codeedit from '../../views/group/code';
 export default {
   name: 'time',
   inject: ["main"],

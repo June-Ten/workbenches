@@ -1,4 +1,4 @@
-import AvueData from './page/view';
+import AvueData from './views/view';
 
 const install = (Vue, ops) => {
   Vue.component('avue-data', AvueData)

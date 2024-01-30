@@ -115,9 +115,9 @@
 </template>
 
 <script>
-import MonacoEditor from '@/page/components/editor'
+import MonacoEditor from '@/views/components/editor'
 import { tableOption, dicOption } from '@/option/config'
-import codeedit from '../../page/group/code';
+import codeedit from '../../views/group/code';
 export default {
   name: 'table',
   data () {

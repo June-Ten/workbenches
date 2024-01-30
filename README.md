@@ -59,7 +59,7 @@ Avue-Data数据大屏(Vue全家桶+ElementUi+Echart+dataV)开发，丰富的交�
 >BI大数据可以打破信息壁垒，形成统一数据共享大平台，打破“信息孤岛”问题。
 ![](https://img.kancloud.cn/79/d2/79d25a1d1162772ebb17392ff2f0a21b_1576x838.png)
 
-### 教育行业
+## # 教育行业
 >BI大数据可以有效查看各基地的情况，通过对教、学、研多层面的数据整合，制定更行之有效的方案。
 ![](https://img.kancloud.cn/13/8c/138c4955d3f2a3d15c0bbf3f499568f2_1584x838.png)
 

@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import codeedit from '../../page/group/code';
-import componentList from '../../page/list/components'
+import codeedit from '../../views/group/code';
+import componentList from '../../views/list/components'
 import { getObj } from '@/api/components'
 export default {
   name: 'vue',

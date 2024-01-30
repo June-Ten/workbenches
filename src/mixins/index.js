@@ -1,7 +1,7 @@
 // 查看页面和编辑页面公用的参数和方法
 import common from '@/config'
 import { config } from '@/option/config'
-import container from '@/page/group/container'
+import container from '@/views/group/container'
 import { getFunction } from '@/utils/utils'
 import { getList } from '@/api/map'
 import { url } from '@/config';

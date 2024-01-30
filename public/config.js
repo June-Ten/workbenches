@@ -1681,7 +1681,7 @@ window.$website = {
             }
           ],
           dataFormatter: "",
-          echartFormatter: "(data)=>{\n  return {\n    config:{\n\t    data: data,\n      //carousel: 'page',\n      valueFormatter ({ value }) {\n        return value+'单位'\n      }\n\t  }\n  }\n}",
+          echartFormatter: "(data)=>{\n  return {\n    config:{\n\t    data: data,\n      //carousel: 'views',\n      valueFormatter ({ value }) {\n        return value+'单位'\n      }\n\t  }\n  }\n}",
           component: {
             width: 652.35,
             height: 248.45,
