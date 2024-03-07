@@ -4,7 +4,7 @@
     :show-close="false" :modal="false">
     <div class="JNPF-full-dialog-header">
       <div class="header-title">
-        <img src="@/assets/images/jnpf.png" class="header-logo" />
+        <img src="@/assets/images/jnpf.png" class="header-logo2" />
         <p class="header-txt"> · 门户预览</p>
       </div>
       <div class="options">
@@ -90,5 +90,13 @@ export default {
   padding: 10px;
   height: 100%;
   width: 100%;
+}
+.header-logo2 {
+  width: auto;
+  height: 40px;
+  vertical-align: top;
+  margin-right: 3px;
+  font-size: 30px;
+  color: #fff;
 }
 </style>

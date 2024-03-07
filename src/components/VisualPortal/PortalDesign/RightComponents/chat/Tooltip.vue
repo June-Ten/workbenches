@@ -1,20 +1,20 @@
 <template>
   <el-collapse-item title="提示语设置" name="8">
-    <el-form-item label="显示">
+    <el-form-item label="显示" class="zztC">
       <el-switch v-model="activeData.option.tooltipShow" />
     </el-form-item>
     <template v-if="activeData.option.tooltipShow">
-      <el-form-item label="字体大小" v-show="showType=='pc'">
+      <el-form-item label="字体大小" v-show="showType=='pc'" class="zztC">
         <el-input-number v-model="activeData.option.tooltipTextStyleFontSize"
           controls-position="right" :min="12" :max="25" />
       </el-form-item>
-      <el-form-item label="字体加粗" v-show="showType=='pc'">
+      <el-form-item label="字体加粗" v-show="showType=='pc'" class="zztC">
         <el-switch v-model="activeData.option.tooltipTextStyleFontWeight" />
       </el-form-item>
-      <el-form-item label="字体颜色" style="height:32px">
+      <el-form-item label="字体颜色" style="height:32px" class="zztC">
         <el-color-picker v-model="activeData.option.tooltipTextStyleColor" />
       </el-form-item>
-      <el-form-item label="背景色" style="height:32px">
+      <el-form-item label="背景色" style="height:32px" class="zztC">
         <el-color-picker v-model="activeData.option.tooltipBgColor" />
       </el-form-item>
     </template>
@@ -32,3 +32,10 @@ export default {
   }
 }
 </script>
+<style lang="css">
+.zztC {
+  .el-form-item__label {
+    color: #000 !important;
+  }
+}
+</style>

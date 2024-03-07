@@ -23,7 +23,7 @@
 <script>
 import {
   layoutComponents,
-  systemComponents,
+  // systemComponents,
   basicComponents,
   chartComponents,
 } from '@/components/VisualPortal/PortalDesign/components/config'
@@ -36,7 +36,7 @@ export default {
       componentsList: [
         { label: '布局控件', jnpfKey: 'layout', icon: 'icon-ym icon-ym-generator-function', list: layoutComponents },
         { label: '基础控件', jnpfKey: 'basic', icon: 'icon-ym icon-ym-tree-department', list: basicComponents },
-        { label: '系统控件', jnpfKey: 'system', icon: 'icon-ym icon-ym-tree-user2', list: systemComponents },
+        // { label: '系统控件', jnpfKey: 'system', icon: 'icon-ym icon-ym-tree-user2', list: systemComponents },
         { label: '图表控件', jnpfKey: 'chart', icon: 'icon-ym icon-ym-file-photo', list: chartComponents }
       ],
     }

@@ -203,6 +203,7 @@ export default {
           background: 'rgba(0, 0, 0, 0.7)'
         });
         getObj(id).then(res => {
+          console.log(Kvid)
           const data = res.data.data;
           this.contain.obj = data;
           config = data.config;

@@ -6,7 +6,7 @@
         <JNPF-table :data="list" ref="dragTable" :hasNO="false" row-key="id">
           <el-table-column align="center" label="拖动" width="50">
             <template>
-              <i class="drag-handler icon-ym icon-ym-darg" style="cursor: move;font-size:20px"
+              <i class="drag-handler el-icon-rank" style="cursor: move;font-size:20px"
                 title='点击拖动' />
             </template>
           </el-table-column>
@@ -133,18 +133,18 @@ export default {
   methods: {
     init(data) {
       this.list = JSON.parse(JSON.stringify(data))
-      this.getDictionaryData()
+      // this.getDictionaryData()
       this.visible = true
       this.$nextTick(() => {
         this.setSort()
         if (this.type != 1) this.initFieldData();
       })
     },
-    getDictionaryData() {
-      this.$store.dispatch('base/getDictionaryData', { sort: 'WorkFlowCategory' }).then((res) => {
-        this.categoryList = res
-      })
-    },
+    // getDictionaryData() {
+    //   this.$store.dispatch('base/getDictionaryData', { sort: 'WorkFlowCategory' }).then((res) => {
+    //     this.categoryList = res
+    //   })
+    // },
     confirm() {
       for (let i = 0; i < this.list.length; i++) {
         const element = this.list[i];

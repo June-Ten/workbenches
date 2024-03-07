@@ -1,89 +1,89 @@
 <template>
   <div>
-    <el-form-item label="地图选择">
+    <el-form-item label="地图选择" class="mapC">
       <el-cascader :options="cascaderOptions" :show-all-levels="false"
         :props="{ checkStrictly: true,value:'id', label:'fullName'}"
         v-model="activeData.option.mapType" @change="cascaderChange"></el-cascader>
     </el-form-item>
-    <el-form-item label="背景色" style="height:32px">
+    <el-form-item label="背景色" style="height:32px" class="mapC">
       <el-color-picker v-model="activeData.option.bgColor" />
     </el-form-item>
-    <el-form-item label="区域颜色" style="height:32px">
+    <el-form-item label="区域颜色" style="height:32px" class="mapC">
       <el-color-picker v-model="activeData.option.geoAreaColor" />
     </el-form-item>
-    <el-form-item label="区域名称">
+    <el-form-item label="区域名称" class="mapC">
       <el-switch v-model="activeData.option.geoLabelShow" />
     </el-form-item>
     <template v-if="activeData.option.geoLabelShow">
-      <el-form-item label="字体大小">
+      <el-form-item label="字体大小" class="mapC">
         <el-input-number v-model="activeData.option.geoLabelFontSize" controls-position="right"
           :min="12" :max="25" />
       </el-form-item>
-      <el-form-item label="字体加粗" v-if="showType == 'pc'">
+      <el-form-item label="字体加粗" v-if="showType == 'pc'" class="mapC">
         <el-switch v-model="activeData.option.geoLabelFontWeight" />
       </el-form-item>
-      <el-form-item label="字体颜色">
+      <el-form-item label="字体颜色" class="mapC">
         <el-color-picker v-model="activeData.option.geoLabelColor" />
       </el-form-item>
     </template>
-    <el-form-item label="区域线">
+    <el-form-item label="区域线" class="mapC">
       <el-slider v-model="activeData.option.geoBorderWidth" :min="0" :max="10" :step="1" />
     </el-form-item>
-    <el-form-item label="区域线颜色" style="height:32px">
+    <el-form-item label="区域线颜色" style="height:32px" class="mapC">
       <el-color-picker v-model="activeData.option.geoBorderColor" />
     </el-form-item>
     <template v-if="showType == 'pc'">
-      <el-form-item label="阴影大小">
+      <el-form-item label="阴影大小" class="mapC">
         <el-slider v-model="activeData.option.geoShadowOffset" :min="0" :max="5" :step="1" />
       </el-form-item>
-      <el-form-item label="阴影颜色" style="height:32px">
+      <el-form-item label="阴影颜色" style="height:32px" class="mapC">
         <el-color-picker v-model="activeData.option.geoShadowColor" />
       </el-form-item>
-      <el-form-item label="鼠标缩放">
+      <el-form-item label="鼠标缩放" class="mapC">
         <el-switch v-model="activeData.option.geoRoam" />
       </el-form-item>
-      <el-form-item label="缩放比例">
+      <el-form-item label="缩放比例" class="mapC">
         <el-slider v-model="activeData.option.mspScale" :min="0.5" :max="5" :step="0.1" />
       </el-form-item>
-      <el-form-item label="地图长宽比">
+      <el-form-item label="地图长宽比" class="mapC">
         <el-slider v-model="activeData.option.geoAspectScale" :min="0.25" :max="1.5" :step="0.05" />
       </el-form-item>
     </template>
-    <el-form-item label="钻取">
+    <el-form-item label="钻取" class="mapC">
       <el-switch v-model="activeData.option.drillDown" />
     </el-form-item>
     <template v-if="activeData.option.drillDown">
-      <el-form-item label="字体大小">
+      <el-form-item label="字体大小" class="mapC">
         <el-input-number v-model="activeData.option.drillDownFontSize" controls-position="right"
           :min="12" :max="25" />
       </el-form-item>
-      <el-form-item label="字体加粗">
+      <el-form-item label="字体加粗" class="mapC">
         <el-switch v-model="activeData.option.drillDownFontWeight" />
       </el-form-item>
-      <el-form-item label="字体颜色" style="height:32px">
+      <el-form-item label="字体颜色" style="height:32px" class="mapC">
         <el-color-picker v-model="activeData.option.drillDownColor" />
       </el-form-item>
     </template>
     <template v-if="showType == 'pc'">
       <el-divider>视觉设置</el-divider>
-      <el-form-item label="视觉类型">
+      <el-form-item label="视觉类型" class="mapC">
         <el-radio-group v-model="activeData.option.visualMapType" size="small">
           <el-radio-button label="continuous" key="continuous">连续</el-radio-button>
           <el-radio-button label="piecewise" key="piecewise">分段</el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="最小值">
+      <el-form-item label="最小值" class="mapC">
         <el-input-number v-model="activeData.option.visualMapMin" controls-position="right" :min="0"
           @change="onVisualMapMinChange" />
       </el-form-item>
-      <el-form-item label="最大值">
+      <el-form-item label="最大值" class="mapC">
         <el-input-number v-model="activeData.option.visualMapMax" controls-position="right" :min="0"
           @change="onVisualMapMaxChange" />
       </el-form-item>
     </template>
     <template v-if="activeData.option.styleType==1||activeData.option.styleType==4">
       <el-divider>散点设置</el-divider>
-      <el-form-item label="散点类型" v-show="showType == 'pc'">
+      <el-form-item label="散点类型" v-show="showType == 'pc'" class="mapC">
         <el-radio-group v-model="activeData.option.seriesType" size="small">
           <el-radio-button label="scatter" key="scatter">散点</el-radio-button>
           <el-radio-button label="effectScatter" key="effectScatter">涟漪散点</el-radio-button>
@@ -95,43 +95,43 @@
         <el-input-number v-model="activeData.option.appShowNumber" controls-position="right"
           :min="0" :max="2000" v-show="showType !== 'pc'" />
       </jnpf-form-tip-item>
-      <el-form-item label="透明度" v-show="showType == 'pc'">
+      <el-form-item label="透明度" v-show="showType == 'pc'" class="mapC">
         <el-slider v-model="activeData.option.seriesItemStyleOpacity" :min="0" :max="1"
           :step="0.1" />
       </el-form-item>
     </template>
     <template v-if="activeData.option.styleType==4&&showType == 'pc'">
       <el-divider>柱形排名设置</el-divider>
-      <el-form-item label="标题名称">
+      <el-form-item label="标题名称" class="mapC">
         <el-input v-model="activeData.option.barTitleText" placeholder="请输入标题名称" />
       </el-form-item>
-      <el-form-item label="字体大小">
+      <el-form-item label="字体大小" class="mapC">
         <el-input-number v-model="activeData.option.barTitleTextStyleFontSize"
           controls-position="right" :min="12" :max="25" />
       </el-form-item>
-      <el-form-item label="字体加粗">
+      <el-form-item label="字体加粗" class="mapC">
         <el-switch v-model="activeData.option.barTitleTextStyleFontWeight" />
       </el-form-item>
       <el-form-item label="字体颜色" style="height:32px">
         <el-color-picker v-model="activeData.option.barTitleTextStyleColor" />
       </el-form-item>
-      <el-form-item label="底边距">
+      <el-form-item label="底边距" class="mapC">
         <el-slider v-model="activeData.option.berGridBottom" :min="0" :max="600" :step="1" />
       </el-form-item>
-      <el-form-item label="右边距">
+      <el-form-item label="右边距" class="mapC">
         <el-slider v-model="activeData.option.berGridRight" :min="0" :max="100" :step="1" />
       </el-form-item>
-      <el-form-item label="顶边距">
+      <el-form-item label="顶边距" class="mapC">
         <el-slider v-model="activeData.option.berGridTop" :min="0" :max="100" :step="1" />
       </el-form-item>
     </template>
     <template
       v-if="(activeData.option.styleType==1||activeData.option.styleType==4)&&showType == 'pc'">
       <el-divider>轮播设置</el-divider>
-      <el-form-item label="开启轮播">
+      <el-form-item label="开启轮播" class="mapC">
         <el-switch v-model="activeData.option.autoCarousel" />
       </el-form-item>
-      <el-form-item label="轮播间隔" v-if="activeData.option.autoCarousel">
+      <el-form-item label="轮播间隔" v-if="activeData.option.autoCarousel" class="mapC">
         <el-input v-model="activeData.option.autoCarouselTime" placeholder="请输入轮播间隔" type="number"
           :min="100" :max="500000">
           <template slot="append">ms</template>
@@ -140,15 +140,15 @@
     </template>
     <template v-if="activeData.option.styleType==2&&showType == 'pc'">
       <el-divider>热力设置</el-divider>
-      <el-form-item label=" 点大小">
+      <el-form-item label=" 点大小" class="mapC">
         <el-input-number v-model="activeData.option.seriesPointSize" controls-position="right"
           :min="0" />
       </el-form-item>
-      <el-form-item label="点模糊大小">
+      <el-form-item label="点模糊大小" class="mapC">
         <el-input-number v-model="activeData.option.seriesBlurSize" controls-position="right"
           :min="0" />
       </el-form-item>
-      <el-form-item label="透明度">
+      <el-form-item label="透明度" class="mapC">
         <el-slider v-model="activeData.option.seriesMaxOpacity" :min="0" :max="5" :step="0.1" />
       </el-form-item>
     </template>
@@ -158,7 +158,7 @@
         <el-input-number v-model="activeData.option.seriesBarWidth" controls-position="right"
           :min="0" :max="100" />
       </el-form-item>
-      <el-form-item label="弧度">
+      <el-form-item label="弧度" class="mapC">
         <el-input-number v-model="activeData.option.seriesItemStyleBarBorderRadius"
           controls-position="right" :min="0" :max="100" />
       </el-form-item>
@@ -181,3 +181,10 @@ export default {
   }
 }
 </script>
+<style lang="css">
+.mapC {
+  .el-form-item__label {
+    color: #000 !important;
+  }
+}
+</style>

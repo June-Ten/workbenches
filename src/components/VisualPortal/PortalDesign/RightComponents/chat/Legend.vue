@@ -1,24 +1,24 @@
 <template>
   <el-collapse-item title="图例设置" name="10">
-    <el-form-item label="显示">
+    <el-form-item label="显示" class="zztC">
       <el-switch v-model="activeData.option.legendShow" />
     </el-form-item>
     <template v-if="activeData.option.legendShow&&showType=='pc'">
-      <el-form-item label="字体大小">
+      <el-form-item label="字体大小" class="zztC">
         <el-input-number v-model="activeData.option.legendTextStyleFontSize"
           controls-position="right" :min="12" :max="25" />
       </el-form-item>
-      <el-form-item label="布局">
+      <el-form-item label="布局" class="zztC">
         <el-radio-group v-model="activeData.option.legendOrient" size="small">
           <el-radio-button :label="item.value" v-for="(item,index) in layoutList" :key="index">
             {{item.label}}
           </el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="上下边距">
+      <el-form-item label="上下边距" class="zztC">
         <el-slider v-model="activeData.option.legendTop" :max="100" />
       </el-form-item>
-      <el-form-item label="左右边距">
+      <el-form-item label="左右边距" class="zztC">
         <el-slider v-model="activeData.option.legendLeft" :max="100" />
       </el-form-item>
     </template>
@@ -42,3 +42,10 @@ export default {
   }
 }
 </script>
+<style lang="css">
+.zztC {
+  .el-form-item__label {
+    color: #000 !important;
+  }
+}
+</style>

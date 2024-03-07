@@ -354,6 +354,7 @@ export default {
         }
       }
       this.currOption = option
+      console.log(option)
     },
     initChart() {
       this.initChartData()

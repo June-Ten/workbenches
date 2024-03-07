@@ -23,20 +23,21 @@ export default {
     return {
       nc: null,
       navs: [
+        {
+          icon: 'el-icon-menu',
+          name: '大屏管理',
+          path: '/'
+        },
         // {
-        //   icon: 'el-icon-menu',
-        //   name: '大屏管理',
-        //   path: '/'
-        // }, {
         //   icon: 'el-icon-location-information',
         //   name: '地图管理',
         //   path: '/map'
         // },
-        {
-          icon: 'el-icon-folder-opened',
-          name: '分类管理',
-          path: '/category'
-        },
+        // {
+        //   icon: 'el-icon-folder-opened',
+        //   name: '分类管理',
+        //   path: '/category'
+        // },
       //   {
       //   icon: 'el-icon-set-up',
       //   name: '数据源管理',
@@ -61,6 +62,11 @@ export default {
           name: '门户设计',
           path: '/portal'
         }
+        // , {
+        //   icon: 'el-icon-thumb',
+        //   name: '远端数据',
+        //   path: '/outData'
+        // }
       ],
       activeNav: null,
       activeIndex: 0,

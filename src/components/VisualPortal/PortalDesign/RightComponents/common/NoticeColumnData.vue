@@ -4,7 +4,7 @@
     <JNPF-table :data="list" ref="dragNoticeTable" :hasNO="false" row-key="id">
       <el-table-column align="center" label="拖动" width="50" v-if="showType == 'pc' && type ==1">
         <template>
-          <i class="drag-handler icon-ym icon-ym-darg" style="cursor: move;font-size:20px"
+          <i class="drag-handler icon-ym el-icon-rank" style="cursor: move;font-size:20px"
             title='点击拖动' />
         </template>
       </el-table-column>
@@ -195,9 +195,9 @@ export default {
       this.list = option ? JSON.parse(JSON.stringify(option)) : []
       this.visible = true
       // 获取公告类型
-      this.$store.dispatch('base/getDictionaryData', { sort: 'NoticeType' }).then(res => {
-        this.classifyOptions = res
-      })
+      // this.$store.dispatch('base/getDictionaryData', { sort: 'NoticeType' }).then(res => {
+      //   this.classifyOptions = res
+      // })
       this.$nextTick(() => {
         this.setSort()
       });

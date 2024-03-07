@@ -1,16 +1,16 @@
 <template>
   <el-row>
     <el-collapse-item title="数据设置" name="12">
-      <el-form-item label="数据类型">
+      <el-form-item label="数据类型" class="zztC">
         <el-radio-group v-model="activeData.dataType" size="small" @change="dataTypeChange">
           <el-radio-button label="static">静态数据</el-radio-button>
           <el-radio-button label="dynamic">远端数据</el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="数据设置" v-if="activeData.dataType==='static'">
+      <el-form-item label="数据设置" v-if="activeData.dataType==='static'" class="zztC">
         <el-button @click="showData(activeData.option.defaultValue)">查看</el-button>
       </el-form-item>
-      <el-form-item label="数据接口" v-if="activeData.dataType==='dynamic'">
+      <el-form-item label="数据接口" v-if="activeData.dataType==='dynamic'" class="zztC">
         <interface-dialog :value="activeData.propsApi" :title="activeData.propsName"
           popupTitle="数据接口" @change="propsApiChange" />
       </el-form-item>
@@ -81,3 +81,10 @@ export default {
   }
 }
 </script>
+<style lang="css">
+.zztC {
+  .el-form-item__label {
+    color: #000 !important;
+  }
+}
+</style>

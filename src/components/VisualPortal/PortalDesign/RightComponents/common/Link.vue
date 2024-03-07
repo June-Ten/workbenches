@@ -2,7 +2,7 @@
   <div>
     <template v-if="type == 1">
       <template v-if="showType == 'pc'">
-        <el-form-item label="链接类型">
+        <el-form-item label="链接类型" class="linkC">
           <el-select v-model="activeData.option.linkType" placeholder="请选择链接类型" clearable
             @change="onLinkTypeChange(1)" filterable>
             <el-option v-for="(item, index) in linkTypeList" :key="index" :label="item.label"
@@ -167,3 +167,10 @@ export default {
   }
 }
 </script>
+<style lang="css">
+.linkC {
+  .el-form-item__label {
+    color: #000 !important;
+  }
+}
+</style>

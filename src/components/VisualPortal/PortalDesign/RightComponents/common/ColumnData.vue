@@ -4,7 +4,7 @@
     <JNPF-table :data="list" ref="dragTable" :hasNO="false" row-key="id" v-if="type==1">
       <el-table-column align="center" label="拖动" width="50">
         <template>
-          <i class="drag-handler icon-ym icon-ym-darg" style="cursor: move;font-size:20px"
+          <i class="drag-handler icon-ym el-icon-rank" style="cursor: move;font-size:20px"
             title='点击拖动' />
         </template>
       </el-table-column>

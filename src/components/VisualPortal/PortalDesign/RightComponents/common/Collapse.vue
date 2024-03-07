@@ -8,7 +8,7 @@
       handle=".option-drag">
       <div v-for="(item, index) in activeData.children" :key="index" class="select-item">
         <div class="select-line-icon option-drag">
-          <i class="icon-ym icon-ym-darg" />
+          <i class="icon-ym el-icon-rank" />
         </div>
         <el-input v-model="item.title" placeholder="标签名称" size="small" />
         <div class="close-btn select-line-icon" @click="delItem(index,item)">

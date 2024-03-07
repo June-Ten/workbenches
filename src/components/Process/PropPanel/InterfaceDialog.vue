@@ -254,7 +254,8 @@ export default {
       this.checkedRow = row
     },
     goDataInterface() {
-      let src = window.location.protocol + "//" + window.location.host + "/systemData/dataInterface"
+      let src = window.location.protocol + "//" + window.location.host + "/systemData/dataInterface/index"
+      console.log(src)
       window.open(src, "_blank")
     }
   }

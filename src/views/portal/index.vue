@@ -141,7 +141,7 @@ import PortalDesign from '@/components/VisualPortal/PortalDesign'
 import previewDialog from '@/components/PreviewDialog'
 import Preview from './IndexPreview'
 import ReleaseDialog from './releaseDialog'
-import {getPortalList} from '@/api/portal'
+import {loginJk , getPortalList , Delete} from '@/api/portal'
 
 export default {
   name: 'portal',
@@ -210,10 +210,14 @@ export default {
         enabledLock: this.enabledLock
       }
       // getPortalList(query).then(res => {
+      loginJk().then(res=> {
+        let BearerToken = res.data.BearerToken
+        localStorage.setItem('Authorization', BearerToken)
+      })
+
       getPortalList().then(res => {
         this.list = res.data.data.list
         this.total = res.data.data.pagination.total
-        // // this.total = res.data.total
         this.listLoading = false
       })
     },
@@ -268,15 +272,15 @@ export default {
     previewPc() {
       this.previewVisible = true
     },
-    // exportTemplate(id) {
-    //   this.$confirm('您确定要导出该门户, 是否继续?', '提示', {
-    //     type: 'warning'
-    //   }).then(() => {
-    //     exportTemplate(id).then(res => {
-    //       this.jnpf.downloadFile(res.data.url)
-    //     })
-    //   }).catch(() => { });
-    // },
+    exportTemplate(id) {
+      this.$confirm('您确定要导出该门户, 是否继续?', '提示', {
+        type: 'warning'
+      }).then(() => {
+        exportTemplate(id).then(res => {
+          this.jnpf.downloadFile(res.data.url)
+        })
+      }).catch(() => { });
+    },
     design(row) {
       this.dialogVisible = false
       this.portalDesignVisible = true
@@ -291,6 +295,7 @@ export default {
         this.$refs.form.init(this.categoryList, id)
       })
     },
+
     closeForm(isRefresh) {
       this.formVisible = false
       if (isRefresh) this.initData()

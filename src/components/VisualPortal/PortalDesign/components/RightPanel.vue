@@ -43,12 +43,12 @@
             <Notice :activeData="activeData" :showType="showType"
               v-if="activeData.jnpfKey=='notice'" />
           </el-collapse>
-          <el-form-item label="多端显示" style="margin-top:10px">
-            <el-checkbox-group v-model="activeData.visibility" size="mini">
-              <el-checkbox label="pc">Web</el-checkbox>
-              <el-checkbox label="app" :disabled="activeData.jnpfKey=='iframe'">App</el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
+<!--          <el-form-item label="多端显示" style="margin-top:10px">-->
+<!--            <el-checkbox-group v-model="activeData.visibility" size="mini">-->
+<!--              <el-checkbox label="pc">Web</el-checkbox>-->
+<!--              <el-checkbox label="app" :disabled="activeData.jnpfKey=='iframe'">App</el-checkbox>-->
+<!--            </el-checkbox-group>-->
+<!--          </el-form-item>-->
         </template>
       </el-form>
       <el-form v-show="currentTab==2" size="small" label-width="86px" labelPosition="left"
@@ -61,9 +61,9 @@
 </template>
 <script>
 import draggable from 'vuedraggable'
-import { getSelectorAll } from '@/api/system/menu'
-import { getFeatureSelector } from '@/api/onlineDev/visualDev'
-import { getDataInterfaceSelector } from '@/api/systemData/dataInterface'
+// import { getSelectorAll } from '@/api/system/menu'
+// import { getFeatureSelector } from '@/api/onlineDev/visualDev'
+// import { getDataInterfaceSelector } from '@/api/systemData/dataInterface'
 import iconBox from '@/components/JNPF-iconBox'
 import JSONArea from './JSONArea'
 import InterfaceDialog from '@/components/Process/PropPanel/InterfaceDialog'
@@ -129,23 +129,23 @@ export default {
     }
   },
   created() {
-    this.getMenuList()
-    this.getDataInterfaceSelector()
+    // this.getMenuList()
+    // this.getDataInterfaceSelector()
   },
   methods: {
-    getMenuList() {
-      getSelectorAll({ category: 'Web' }).then(res => {
-        this.menuList = (res.data.list || []).filter(o => o.children && o.children.length)
-      })
-      getSelectorAll({ category: 'App' }).then(res => {
-        this.appMenuList = (res.data.list || []).filter(o => o.children && o.children.length)
-      })
-    },
-    getDataInterfaceSelector() {
-      getDataInterfaceSelector().then(res => {
-        this.dataInterfaceOptions = res.data
-      })
-    },
+    // getMenuList() {
+    //   getSelectorAll({ category: 'Web' }).then(res => {
+    //     this.menuList = (res.data.list || []).filter(o => o.children && o.children.length)
+    //   })
+    //   getSelectorAll({ category: 'App' }).then(res => {
+    //     this.appMenuList = (res.data.list || []).filter(o => o.children && o.children.length)
+    //   })
+    // },
+    // getDataInterfaceSelector() {
+    //   getDataInterfaceSelector().then(res => {
+    //     this.dataInterfaceOptions = res.data
+    //   })
+    // },
     getSelectValue(data, i) {
       if (!data[0]) {
         this.$set(this.activeData.list, i, {

@@ -1,17 +1,17 @@
 <template>
   <el-collapse-item title="日程设置" name="14">
-    <el-form-item label="默认视图">
+    <el-form-item label="默认视图" class="scheduleC">
       <el-radio-group v-model="activeData.defaultView" @change="renderKeyChange">
         <el-radio-button label="timeGridDay">日</el-radio-button>
         <el-radio-button label="timeGridWeek">周</el-radio-button>
         <el-radio-button label="dayGridMonth">月</el-radio-button>
       </el-radio-group>
     </el-form-item>
-    <el-form-item label="显示农历">
+    <el-form-item label="显示农历" class="scheduleC">
       <el-switch v-model="activeData.showLunarCalendar">
       </el-switch>
     </el-form-item>
-    <el-form-item label="周第一天">
+    <el-form-item label="周第一天" class="scheduleC">
       <el-select v-model="activeData.firstDay" placeholder="请选择" filterable>
         <el-option v-for="item in firstDayOptions" :key="item.value" :label="item.label"
           :value="item.value">
@@ -75,3 +75,10 @@ export default {
   }
 }
 </script>
+<style lang="css">
+.scheduleC {
+  .el-form-item__label {
+    color: #000 !important;
+  }
+}
+</style>

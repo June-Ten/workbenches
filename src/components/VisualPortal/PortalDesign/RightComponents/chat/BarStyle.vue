@@ -1,11 +1,11 @@
 <template>
   <el-collapse-item title="柱体设置" name="4"
     v-if="!(activeData.option.styleType == 6&&showType == 'app')">
-    <el-form-item label="宽度">
+    <el-form-item label="宽度" class="zztC">
       <el-input-number v-model="activeData.option.seriesBarWidth" controls-position="right" :min="0"
         :max="100" />
     </el-form-item>
-    <el-form-item label="弧度" v-if="!(activeData.option.styleType == 2&&showType == 'app')">
+    <el-form-item label="弧度" v-if="!(activeData.option.styleType == 2&&showType == 'app')" class="zztC">
       <el-input-number v-model="activeData.option.seriesItemStyleBarBorderRadius"
         controls-position="right" :min="0" :max="100" />
     </el-form-item>
@@ -23,3 +23,10 @@ export default {
   }
 }
 </script>
+<style lang="css">
+.zztC {
+  .el-form-item__label {
+    color: #000 !important;
+  }
+}
+</style>

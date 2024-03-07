@@ -454,12 +454,12 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="多端显示">
-              <el-checkbox-group v-model="activeData.__config__.visibility" size="mini">
-                <el-checkbox label="pc">Web</el-checkbox>
-                <el-checkbox label="app">App</el-checkbox>
-              </el-checkbox-group>
-            </el-form-item>
+<!--            <el-form-item label="多端显示" class="ddxsC">-->
+<!--              <el-checkbox-group v-model="activeData.__config__.visibility" size="mini">-->
+<!--                <el-checkbox label="pc">Web</el-checkbox>-->
+<!--                <el-checkbox label="app">App</el-checkbox>-->
+<!--              </el-checkbox-group>-->
+<!--            </el-form-item>-->
           </template>
         </el-form>
         <!-- 表单属性 -->

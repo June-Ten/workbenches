@@ -255,6 +255,7 @@ export default {
     },
     handleViews(item) {
       const routeUrl = window.location.href + `view/?Kvid=` + item.Kvid
+      console.log("----"+routeUrl)
       window.open(routeUrl, '_blank');
     },
     handleSave(form, done) {

@@ -8,12 +8,12 @@
           <p class="preview-title">Web预览</p>
         </div>
       </div>
-      <div class="preview-item" @click="previewApp()">
-        <i class="preview-icon icon-ym icon-ym-mobile"></i>
-        <div class="preview-txt">
-          <p class="preview-title">App预览</p>
-        </div>
-      </div>
+<!--      <div class="preview-item" @click="previewApp()">-->
+<!--        <i class="preview-icon icon-ym icon-ym-mobile"></i>-->
+<!--        <div class="preview-txt">-->
+<!--          <p class="preview-title">App预览</p>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
     <el-dialog :close-on-click-modal="false" :modal-append-to-body="false" append-to-body
       :visible.sync="previewAppVisible" class="JNPF-dialog JNPF-dialog_center code-dialog"
@@ -57,21 +57,21 @@ export default {
         this.$router.push(`/previewModel?isPreview=1&id=${this.id}&previewType=${this.previewType}`)
       }
     },
-    previewApp() {
-      let text = {
-        t: this.type === 'flow' ? 'WFP' : this.type === 'webDesign' ? 'ADP' : 'report',
-        id: this.id
-      }
-      if (this.type === 'report') text.fullName = this.fullName
-      if (this.type === 'flow') text.ds = this.dataSource
-      if (this.type == 'webDesign') text.previewType = this.previewType
-      if (this.type == 'portal') text.t = 'portal'
-      this.qrCodeText = JSON.stringify(text)
-      this.closeDialog()
-      setTimeout(() => {
-        this.previewAppVisible = true
-      }, 300)
-    },
+    // previewApp() {
+    //   let text = {
+    //     t: this.type === 'flow' ? 'WFP' : this.type === 'webDesign' ? 'ADP' : 'report',
+    //     id: this.id
+    //   }
+    //   if (this.type === 'report') text.fullName = this.fullName
+    //   if (this.type === 'flow') text.ds = this.dataSource
+    //   if (this.type == 'webDesign') text.previewType = this.previewType
+    //   if (this.type == 'portal') text.t = 'portal'
+    //   this.qrCodeText = JSON.stringify(text)
+    //   this.closeDialog()
+    //   setTimeout(() => {
+    //     this.previewAppVisible = true
+    //   }, 300)
+    // },
     getQRimg() {
       if (!this.qrCodeText) return
       this.$refs.qrCode.innerHTML = "";

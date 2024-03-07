@@ -4,32 +4,32 @@
       :visible.sync="visible" class="JNPF-dialog JNPF-dialog_center" lock-scroll width="600px"
       append-to-body>
       <el-form ref="dataForm" :model="dataForm" :rules="dataRule" label-width="100px">
-        <el-form-item label="类型" prop="category">
+        <el-form-item label="类型" prop="category" class="dateCC">
           <el-select v-model="dataForm.category" placeholder="请选择类型" clearable filterable>
             <el-option v-for="item in typeOptions" :key="item.id" :label="item.fullName"
               :value="item.id">
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="紧急程度" prop="urgent">
+        <el-form-item label="紧急程度" prop="urgent" class="dateCC">
           <el-select v-model="dataForm.urgent" placeholder="请选择紧急程度" filterable>
             <el-option v-for="item in urgentList" :key="item.id" :label="item.fullName"
               :value="item.id">
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="标题" prop="title">
+        <el-form-item label="标题" prop="title" class="dateCC">
           <el-input v-model="dataForm.title" placeholder="请输入标题" />
         </el-form-item>
-        <el-form-item label="内容" prop="content">
+        <el-form-item label="内容" prop="content" class="dateCC">
           <el-input v-model="dataForm.content" placeholder="请输入内容" type="textarea" :rows="3" />
         </el-form-item>
-        <el-form-item label="全天" prop="allDay">
+        <el-form-item label="全天" prop="allDay" class="dateCC">
           <el-switch v-model="dataForm.allDay" :active-value="1" :inactive-value="0"
             @change="change_providerType">
           </el-switch>
         </el-form-item>
-        <el-form-item label="开始时间" prop="startDay">
+        <el-form-item label="开始时间" prop="startDay" class="dateCC">
           <el-col :span="14">
             <el-date-picker v-model="dataForm.startDay" type="date" placeholder="请选择开始日期"
               :editable="false" :clearable="false" format="yyyy-MM-dd" value-format="timestamp"
@@ -42,7 +42,7 @@
             </el-time-select>
           </el-col>
         </el-form-item>
-        <el-form-item label="时长" prop="duration" v-if="dataForm.duration!=-1&&dataForm.allDay==0">
+        <el-form-item label="时长" prop="duration" v-if="dataForm.duration!=-1&&dataForm.allDay==0" class="dateCC">
           <el-select v-model="dataForm.duration" placeholder="请选择" clearable
             @change="durationChange">
             <el-option v-for="item in durationList" :key="item.id" :label="item.fullName"
@@ -50,7 +50,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="结束时间" prop="endDay" v-if='dataForm.duration==-1||dataForm.allDay'>
+        <el-form-item label="结束时间" prop="endDay" v-if='dataForm.duration==-1||dataForm.allDay' class="dateCC">
           <el-col :span="14">
             <el-date-picker v-model="dataForm.endDay" type="date" placeholder="请选择结束日期"
               :editable="false" :clearable="false" format="yyyy-MM-dd" value-format="timestamp">
@@ -62,17 +62,17 @@
             </el-time-select>
           </el-col>
         </el-form-item>
-        <el-form-item label="创建人" prop="creatorUserId">
+        <el-form-item label="创建人" prop="creatorUserId" class="dateCC">
           <JnpfUserSelect v-model="dataForm.creatorUserId" placeholder="创建人" disabled />
         </el-form-item>
-        <el-form-item label="参与人" prop="toUserIds">
+        <el-form-item label="参与人" prop="toUserIds" class="dateCC">
           <JnpfUserSelect v-model="dataForm.toUserIds" placeholder="请选择参与人" multiple clearable />
         </el-form-item>
-        <el-form-item label="标签颜色" prop="color">
+        <el-form-item label="标签颜色" prop="color" class="dateCC">
           <el-color-picker v-model="dataForm.color"
             :predefine="['#188ae2', '#35b8e0', '#26bf8c','#f9c851','#ff5b5b', '#5b69bc', '#ff8acc', '#3b3e47','#282828' ]" />
         </el-form-item>
-        <el-form-item label="提醒时间" prop="reminderTime">
+        <el-form-item label="提醒时间" prop="reminderTime" class="dateCC">
           <el-select v-model="dataForm.reminderTime" placeholder="请选择提醒时间" filterable>
             <el-option v-for="item in reminderTimeList" :key="item.id" :label="item.fullName"
               :value="item.id">
@@ -80,19 +80,19 @@
           </el-select>
         </el-form-item>
         <template v-if="dataForm.reminderTime!=-2">
-          <el-form-item label="提醒方式" prop="reminderType">
+          <el-form-item label="提醒方式" prop="reminderType" class="dateCC">
             <el-select v-model="dataForm.reminderType" placeholder="请选择提醒方式" filterable>
               <el-option v-for="item in remindList" :key="item.id" :label="item.fullName"
                 :value="item.id">
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="发送配置" prop="send" v-if="dataForm.reminderType==2">
+          <el-form-item label="发送配置" prop="send" v-if="dataForm.reminderType==2" class="dateCC">
             <msg-dialog :value="dataForm.send" :title="dataForm.sendName" @change="onMsgChange"
               :messageSource="4" />
           </el-form-item>
         </template>
-        <el-form-item label="重复提醒" prop="repetition">
+        <el-form-item label="重复提醒" prop="repetition" class="dateCC">
           <el-select v-model="dataForm.repetition" placeholder="请选择重复提醒" filterable
             @change="repetitionChange">
             <el-option v-for="item in repeatReminderList" :key="item.id" :label="item.fullName"
@@ -100,7 +100,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="结束重复" prop="repeatTime" v-if='dataForm.repetition!=1'>
+        <el-form-item label="结束重复" prop="repeatTime" v-if='dataForm.repetition!=1' class="dateCC">
           <el-date-picker v-model="dataForm.repeatTime" type="date" placeholder="请选择结束重复" clearable
             format="yyyy-MM-dd" value-format="timestamp" style="width:100%">
           </el-date-picker>
@@ -544,5 +544,12 @@ export default {
 }
 .jnpf-el-row {
   width: 100% !important;
+}
+</style>
+<style lang="css">
+.dateCC {
+  .el-form-item__label {
+    color: #000 !important;
+  }
 }
 </style>

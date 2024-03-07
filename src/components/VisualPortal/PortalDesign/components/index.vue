@@ -75,7 +75,7 @@ import VueGridLayout from 'vue-grid-layout'
 import { deepClone } from '@/utils'
 import {
   layoutComponents,
-  systemComponents,
+  // systemComponents,
   basicComponents,
   chartComponents,
   noNeedMaskList,
@@ -120,7 +120,7 @@ export default {
       componentsList: [
         { title: '布局控件', list: layoutComponents },
         { title: '基础控件', list: basicComponents },
-        { title: '系统控件', list: systemComponents },
+        // { title: '系统控件', list: systemComponents },
         { title: '图表控件', list: chartComponents }
       ],
       layout: [],
@@ -289,7 +289,6 @@ export default {
       })
     },
     addComponent(item, type, currentItem, index) {
-
       let clone = deepClone(item)
       let x = 0, y = 0, i = this.config.layoutId
       if (this.layout.length) {

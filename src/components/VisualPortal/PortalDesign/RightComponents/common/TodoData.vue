@@ -69,18 +69,19 @@ export default {
   },
   methods: {
     init(data) {
+      alert(123)
       this.list = JSON.parse(JSON.stringify(data))
-      this.getDictionaryData()
+      // this.getDictionaryData()
       this.visible = true
       this.$nextTick(() => {
         this.setSort()
       })
     },
-    getDictionaryData() {
-      this.$store.dispatch('base/getDictionaryData', { sort: 'WorkFlowCategory' }).then((res) => {
-        this.categoryList = res
-      })
-    },
+    // getDictionaryData() {
+    //   this.$store.dispatch('base/getDictionaryData', { sort: 'WorkFlowCategory' }).then((res) => {
+    //     this.categoryList = res
+    //   })
+    // },
     confirm() {
       for (let i = 0; i < this.list.length; i++) {
         const element = this.list[i];

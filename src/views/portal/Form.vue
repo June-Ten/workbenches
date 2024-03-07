@@ -2,14 +2,18 @@
   <div>
     <el-dialog :title="!dataForm.id ? '新建' : '编辑'" :close-on-click-modal="false"
       :visible.sync="visible" class="JNPF-dialog JNPF-dialog_center" lock-scroll width="600px">
-      <el-alert title="新建成功后，前往【系统管理】>【系统菜单】中添加应用门户并授权。" type="warning" :closable="false" show-icon
-        class="alert" v-if="!dataForm.id" />
+<!--      <el-alert title="新建成功后，前往【系统管理】>【系统菜单】中添加应用门户并授权。" type="warning" :closable="false" show-icon-->
+<!--        class="alert" v-if="!dataForm.id" />-->
       <el-form ref="dataForm" :model="dataForm" :rules="dataRule" v-loading="loading"
         label-width="100px">
-        <jnpf-form-tip-item label="名称" prop="fullName">
+        <jnpf-form-tip-item label="名称" prop="fullName" class="newColor">
           <el-input v-model="dataForm.fullName" placeholder="名称" maxlength="100">
           </el-input>
         </jnpf-form-tip-item>
+<!--        <el-form-item label="名称" prop="fullName">-->
+<!--          <el-input v-model="dataForm.fullName" placeholder="名称" maxlength="100">&ndash;&gt;-->
+<!--                      </el-input>-->
+<!--        </el-form-item>-->
         <jnpf-form-tip-item label="编码" prop="enCode">
           <el-input v-model="dataForm.enCode" placeholder="编码" maxlength="50">
           </el-input>
@@ -55,7 +59,7 @@
         </jnpf-form-tip-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="visible = false">{{$t('common.cancelButton')}}</el-button>
+<!--        <el-button @click="visible = false">{{$t('common.cancelButton')}}</el-button>-->
         <el-button type="primary" :loading="btnLoading" @click="dataFormSubmit()"
           :disabled="designBtnLoading">
           {{$t('common.confirmButton')}}</el-button>
@@ -68,7 +72,8 @@
 </template>
 
 <script>
-import { getPortalInfo, Update, Create } from '@/api/onlineDev/portal'
+// import { getPortalInfo, Update, Create } from '@/api/onlineDev/portal'
+import { createPortal  , getPortalInfo , updatePortal} from '@/api/onlineDev/portal'
 import PortalDesign from '@/components/VisualPortal/PortalDesign'
 import { validURL } from '@/utils/validate'
 export default {
@@ -99,26 +104,26 @@ export default {
       },
       designBtnLoading: false,
       dataRule: {
-        fullName: [
-          { required: true, message: '门户名称不能为空', trigger: 'blur' },
-        ],
-        enCode: [
-          { required: true, message: '门户编码不能为空', trigger: 'blur' },
-          { validator: this.formValidate('enCode'), trigger: 'blur' },
-        ],
-        type: [
-          { required: true, message: '类型不能为空', trigger: 'change' },
-        ],
-        category: [
-          { required: true, message: '门户分类不能为空', trigger: 'change' },
-        ],
-        linkType: [
-          { required: true, message: '链接类型不能为空', trigger: 'change' },
-        ],
-        customUrl: [
-          { required: true, message: '链接地址不能为空', trigger: 'blur' },
-          { validator: validateUrl, trigger: 'blur' }
-        ],
+        // fullName: [
+        //   { required: true, message: '门户名称不能为空', trigger: 'blur' },
+        // ],
+        // // enCode: [
+        // //   { required: true, message: '门户编码不能为空', trigger: 'blur' },
+        // //   { validator: this.formValidate('enCode'), trigger: 'blur' },
+        // // ],
+        // type: [
+        //   { required: true, message: '类型不能为空', trigger: 'change' },
+        // ],
+        // category: [
+        //   { required: true, message: '门户分类不能为空', trigger: 'change' },
+        // ],
+        // linkType: [
+        //   { required: true, message: '链接类型不能为空', trigger: 'change' },
+        // ],
+        // customUrl: [
+        //   { required: true, message: '链接地址不能为空', trigger: 'blur' },
+        //   { validator: validateUrl, trigger: 'blur' }
+        // ],
       }
     }
   },
@@ -126,6 +131,7 @@ export default {
     init(categoryList, id) {
       this.categoryList = categoryList
       this.dataForm.id = id || ''
+      // this.dataForm.id =  ''
       this.visible = true
       this.btnLoading = false
       this.designBtnLoading = false
@@ -135,7 +141,7 @@ export default {
         if (this.dataForm.id) {
           this.loading = true
           getPortalInfo(this.dataForm.id).then(res => {
-            this.dataForm = res.data
+            this.dataForm = res.data.data.list[0]
             this.loading = false
           }).catch(() => {
             this.loading = false
@@ -162,7 +168,8 @@ export default {
         } else {
           this.btnLoading = true
         }
-        const formMethod = this.dataForm.id ? Update : Create
+        // const formMethod = this.dataForm.id ? Update : Create
+        const formMethod = this.dataForm.id ? updatePortal : createPortal
         formMethod(this.dataForm).then((res) => {
           this.$message({
             message: res.msg,
@@ -189,5 +196,10 @@ export default {
 .alert {
   margin-top: -10px;
   margin-bottom: 10px;
+}
+.newColor {
+  .jnpf-form-tip-item__label {
+    color: #000 !important;
+  }
 }
 </style>

@@ -37,4 +37,8 @@ export default {
   display: inline-block;
   width: 14px;
 }
+span{
+  color: #000 !important;
+}
+
 </style>

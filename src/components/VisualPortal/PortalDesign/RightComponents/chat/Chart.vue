@@ -9,39 +9,39 @@
       </el-select>
     </jnpf-form-tip-item>
     <template v-if="activeData.jnpfKey == 'lineChart'">
-      <el-form-item label="面积堆积">
+      <el-form-item label="面积堆积" class="chartC">
         <el-switch v-model="activeData.option.areaStyle" />
       </el-form-item>
-      <el-form-item label="线条宽度">
+      <el-form-item label="线条宽度" class="chartC">
         <el-slider v-model="activeData.option.seriesLineStyleWidth" :min="1" :max="20" />
       </el-form-item>
-      <el-form-item label="点的大小" v-show="showType == 'pc'">
+      <el-form-item label="点的大小" v-show="showType == 'pc'" class="chartC">
         <el-slider v-model="activeData.option.seriesSymbolRotate" :max="20" />
       </el-form-item>
     </template>
     <template v-if="activeData.jnpfKey == 'pieChart'">
-      <el-form-item label="南丁格尔图" v-show="showType == 'pc'||activeData.option.styleType==1">
+      <el-form-item label="南丁格尔图" v-show="showType == 'pc'||activeData.option.styleType==1" class="chartC">
         <el-switch v-model="activeData.option.roseType" />
       </el-form-item>
-      <el-form-item label="自动排序" v-show="showType == 'pc'">
+      <el-form-item label="自动排序" v-show="showType == 'pc'" class="chartC">
         <el-switch v-model="activeData.option.sortable" />
       </el-form-item>
-      <el-form-item label="不展示零">
+      <el-form-item label="不展示零" class="chartC">
         <el-switch v-model="activeData.option.showZero" />
       </el-form-item>
     </template>
     <template v-if="activeData.jnpfKey == 'radarChart'">
-      <el-form-item label="指示器大小" v-show="showType == 'pc'">
+      <el-form-item label="指示器大小" v-show="showType == 'pc'" class="chartC">
         <el-input-number v-model="activeData.option.radarAxisNameFontSize" controls-position="right"
           :min="12" :max="25" />
       </el-form-item>
-      <el-form-item label="指示器加粗" v-show="showType == 'pc'">
+      <el-form-item label="指示器加粗" v-show="showType == 'pc'" class="chartC">
         <el-switch v-model="activeData.option.radarAxisNameFontWeight" />
       </el-form-item>
       <el-form-item label="指示器颜色" style="height:32px">
         <el-color-picker v-model="activeData.option.radarAxisNameColor" />
       </el-form-item>
-      <el-form-item label="区域透明度" v-show="showType == 'pc'">
+      <el-form-item label="区域透明度" v-show="showType == 'pc'" class="chartC">
         <el-slider v-model="activeData.option.seriesAreaStyleOpacity" :max="1" :step="0.1" />
       </el-form-item>
     </template>
@@ -94,52 +94,52 @@
       </jnpf-form-tip-item>
     </template>
     <template v-if="activeData.jnpfKey == 'text'">
-      <el-form-item label="文本类型">
+      <el-form-item label="文本类型" class="chartC">
         <el-radio-group v-model="activeData.option.styleType" size="small" @change="textChange">
           <el-radio-button :label="item.value" v-for="(item,index) in textStyleList" :key="index">
             {{item.label}}
           </el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="数据类型">
+      <el-form-item label="数据类型" class="chartC">
         <el-radio-group v-model="activeData.dataType" size="small" @change="dataTypeChange">
           <el-radio-button label="static">静态数据</el-radio-button>
           <el-radio-button label="dynamic">远端数据</el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="文本内容" v-if="activeData.dataType=='static'">
+      <el-form-item label="文本内容" v-if="activeData.dataType=='static'" class="chartC">
         <el-input v-if="activeData.option.styleType==1" v-model="activeData.option.defaultValue"
           placeholder="请输入文本内容" />
         <el-button v-if="activeData.option.styleType==2" @click="showEditor()">设置</el-button>
       </el-form-item>
-      <el-form-item label="数据接口" v-else>
+      <el-form-item label="数据接口" v-else class="chartC">
         <interface-dialog :value="activeData.propsApi" :title="activeData.propsName"
           popupTitle="数据接口" @change="propsApiChange" />
       </el-form-item>
       <refresh v-if="activeData.dataType==='dynamic'&&activeData.propsApi"
         :refresh="activeData.refresh" />
       <template v-if="activeData.option.styleType!=2">
-        <el-form-item label="文本大小">
+        <el-form-item label="文本大小" class="chartC">
           <el-input-number v-model="activeData.option.textFontSize" controls-position="right"
             :min="12" :max="25" />
         </el-form-item>
-        <el-form-item label="文本加粗">
+        <el-form-item label="文本加粗" class="chartC">
           <el-switch v-model="activeData.option.textFontWeight" />
         </el-form-item>
-        <el-form-item label="文本斜体">
+        <el-form-item label="文本斜体" class="chartC">
           <el-switch v-model="activeData.option.textFontStyle" />
         </el-form-item>
-        <el-form-item label="文本颜色" style="height:32px">
+        <el-form-item label="文本颜色" style="height:32px" class="chartC">
           <el-color-picker v-model="activeData.option.textFontColor" />
         </el-form-item>
-        <el-form-item label="文本位置">
+        <el-form-item label="文本位置" class="chartC">
           <el-radio-group v-model="activeData.option.textLeft" size="small">
             <el-radio-button :label="item.value" v-for="(item,index) in alignList" :key="index">
               {{item.label}}
             </el-radio-button>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="文本下划线">
+        <el-form-item label="文本下划线" class="chartC">
           <el-radio-group v-model="activeData.option.textUnderLine" size="small">
             <el-radio-button :label="item.value" v-for="(item,index) in underLineList" :key="index">
               {{item.label}}
@@ -147,30 +147,30 @@
           </el-radio-group>
         </el-form-item>
       </template>
-      <el-form-item label="文本滚动" v-if="activeData.option.styleType!='2'">
+      <el-form-item label="文本滚动" v-if="activeData.option.styleType!='2'" class="chartC">
         <el-switch v-model="activeData.option.textAutoplay" />
       </el-form-item>
       <template v-if="activeData.option.textAutoplay&&activeData.option.styleType!='2'">
-        <el-form-item label="滚动方向" v-if="showType=='pc'">
+        <el-form-item label="滚动方向" v-if="showType=='pc'" class="chartC">
           <el-radio-group v-model="activeData.option.textAutoplayMode" size="small"
             @change="renderKeyChange">
             <el-radio-button label="left">横向</el-radio-button>
             <el-radio-button label="up">纵向</el-radio-button>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="滚动速度">
+        <el-form-item label="滚动速度" class="chartC">
           <el-input-number v-model="activeData.option.textAutoplaySpeed" controls-position="right"
             :min="10" :max="100" @change="renderKeyChange" />
         </el-form-item>
       </template>
-      <el-form-item label="背景色" style="height:32px">
+      <el-form-item label="背景色" style="height:32px" class="chartC">
         <el-color-picker v-model="activeData.option.textBgColor" />
       </el-form-item>
       <Link :activeData="activeData" :menuList="menuList" :appMenuList="appMenuList"
         :showType="showType" />
     </template>
     <template v-if="activeData.jnpfKey == 'image'">
-      <el-form-item label="图片来源">
+      <el-form-item label="图片来源" class="chartC">
         <el-radio-group v-model="activeData.option.styleType" size="small"
           @change="styleTypeChange">
           <el-radio-button :label="item.value" v-for="(item,index) in styleTypeOptions"
@@ -186,19 +186,19 @@
         tipLabel='地址以http://或https://为开头'>
         <el-input v-model="activeData.option.defaultValue" placeholder="请输入图片地址" />
       </jnpf-form-tip-item>
-      <el-form-item label="数据接口" v-else>
+      <el-form-item label="数据接口" v-else class="chartC">
         <interface-dialog :value="activeData.propsApi" :title="activeData.propsName"
           popupTitle="数据接口" @change="propsApiChange" />
       </el-form-item>
       <refresh v-if="activeData.dataType==='dynamic'&&activeData.propsApi"
         :refresh="activeData.refresh" />
-      <el-form-item label="填充方式">
+      <el-form-item label="填充方式" class="chartC">
         <el-select v-model="activeData.option.imageFillStyle" placeholder="请选择风格类型" filterable>
           <el-option v-for="(item, index) in fillStyleList" :key="index" :label="item.label"
             :value="item.value" />
         </el-select>
       </el-form-item>
-      <el-form-item label="文本内容">
+      <el-form-item label="文本内容" class="chartC">
         <el-input v-model="activeData.option.textDefaultValue" placeholder="请输入文本内容" />
       </el-form-item>
       <textSet :activeData="activeData" />
@@ -206,23 +206,23 @@
         :showType="showType" />
     </template>
     <template v-if="activeData.jnpfKey == 'carousel'">
-      <el-form-item label="轮播图方向" v-show="showType=='pc'">
+      <el-form-item label="轮播图方向" v-show="showType=='pc'" class="chartC">
         <el-radio-group v-model="activeData.option.carouselDirection" size="small">
           <el-radio-button :label="item.value" v-for="(item,index) in directionList" :key="index">
             {{item.label}}
           </el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="自动轮播">
+      <el-form-item label="自动轮播" class="chartC">
         <el-switch v-model="activeData.option.carouselAutoplay" />
       </el-form-item>
-      <el-form-item label="轮播间隔">
+      <el-form-item label="轮播间隔" class="chartC">
         <el-input v-model="activeData.option.carouselInterval" placeholder="请输入轮播间隔" type="number"
           :min="500" :max="500000">
           <template slot="append">ms</template>
         </el-input>
       </el-form-item>
-      <el-form-item label="指示点显示">
+      <el-form-item label="指示点显示" class="chartC">
         <el-radio-group v-model="activeData.option.carouselIndicatorPosition" size="small">
           <el-radio-button :label="item.value" v-for="(item,index) in indicatorPositionList"
             :key="index">
@@ -232,27 +232,27 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="箭头显示"
-        v-if="activeData.option.carouselDirection=='horizontal'&&showType=='pc'">
+        v-if="activeData.option.carouselDirection=='horizontal'&&showType=='pc'" class="chartC">
         <el-radio-group v-model="activeData.option.carouselArrow" size="small">
           <el-radio-button :label="item.value" v-for="(item,index) in arrowList" :key="index">
             {{item.label}}
           </el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="循环显示" v-show="showType=='pc'">
+      <el-form-item label="循环显示" v-show="showType=='pc'" class="chartC">
         <el-switch v-model="activeData.option.carouselLoop" />
       </el-form-item>
-      <el-form-item label="3D效果" v-show="showType!='pc'">
+      <el-form-item label="3D效果" v-show="showType!='pc'" class="chartC">
         <el-switch v-model="activeData.option.carouselType" />
       </el-form-item>
-      <el-form-item label="选项">
+      <el-form-item label="选项" class="chartC">
         <el-button @click="showData('carouselData','carouselDataVisible')">设置</el-button>
       </el-form-item>
       <refresh :refresh="activeData.refresh"
         v-show="activeData.option[showType=='pc'?'defaultValue':'appDefaultValue'].find(ele => ele.dataType === 3)" />
       <CarouselData ref="carouselData" :menuList="menuList" :appMenuList="appMenuList"
         :showType="showType" v-if="carouselDataVisible" @refresh="refresh" />
-      <el-form-item label="填充方式">
+      <el-form-item label="填充方式" class="chartC">
         <el-select v-model="activeData.option.imageFillStyle" placeholder="请选择风格类型" filterable>
           <el-option v-for="(item, index) in fillStyleList" :key="index" :label="item.label"
             :value="item.value" />
@@ -261,7 +261,7 @@
       <textSet :activeData="activeData" />
     </template>
     <template v-if="activeData.jnpfKey == 'video'">
-      <el-form-item label="视频来源">
+      <el-form-item label="视频来源" class="chartC">
         <el-radio-group v-model="activeData.option.styleType" size="small"
           @change="styleTypeChange">
           <el-radio-button :label="item.value" v-for="(item,index) in styleTypeOptions"
@@ -270,7 +270,7 @@
           </el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="上传视频" v-if="activeData.option.styleType=='1'">
+      <el-form-item label="上传视频" v-if="activeData.option.styleType=='1'" class="chartC">
         <JnpfUploadFile v-model="fileList" :limit="1" buttonText="上传视频" accept="video/*"
           fileSize="100" @change="uploadFileChange" />
       </el-form-item>
@@ -279,24 +279,24 @@
         <el-input v-model="activeData.option.defaultValue" placeholder="请输入视频地址" />
       </jnpf-form-tip-item>
       <template v-else>
-        <el-form-item label="数据接口">
+        <el-form-item label="数据接口" class="chartC">
           <interface-dialog :value="activeData.propsApi" :title="activeData.propsName"
             popupTitle="数据接口" @change="propsApiChange" />
         </el-form-item>
         <refresh v-if="activeData.dataType==='dynamic'&&activeData.propsApi"
           :refresh="activeData.refresh" />
       </template>
-      <el-form-item label="自动播放">
+      <el-form-item label="自动播放" class="chartC">
         <el-switch v-model="activeData.option.videoAutoplay" />
       </el-form-item>
-      <el-form-item label="播放频率">
+      <el-form-item label="播放频率" class="chartC">
         <el-radio-group v-model="activeData.option.playNumber" size="small">
           <el-radio-button :label="item.value" v-for="(item,index) in playNumberList" :key="index">
             {{item.label}}
           </el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="静音播放">
+      <el-form-item label="静音播放" class="chartC">
         <el-switch v-model="activeData.option.mutePlay" />
       </el-form-item>
     </template>
@@ -307,93 +307,93 @@
     </template>
     <template v-if="activeData.jnpfKey == 'todo'">
       <template v-if="showType=='app'">
-        <el-form-item label="风格类型">
+        <el-form-item label="风格类型" class="chartC">
           <el-select v-model="activeData.option.styleType" placeholder="请选择风格类型" filterable>
             <el-option v-for="(item, index) in appTodoStyleList" :key="index" :label="item.label"
               :value="item.value" />
           </el-select>
         </el-form-item>
         <template v-if="activeData.option.styleType==2">
-          <el-form-item label="每行选项数">
+          <el-form-item label="每行选项数" class="chartC">
             <el-input-number v-model="activeData.option.appRowNumber" controls-position="right"
               :min="1" :max="10" />
           </el-form-item>
-          <el-form-item label="显示边框">
+          <el-form-item label="显示边框" class="chartC">
             <el-switch v-model="activeData.option.appShowBorder" />
           </el-form-item>
         </template>
       </template>
       <template v-else>
-        <el-form-item label="每行选项数">
+        <el-form-item label="每行选项数" class="chartC">
           <el-input-number v-model="activeData.option.rowNumber" controls-position="right" :min="1"
             :max="10" />
         </el-form-item>
-        <el-form-item label="显示边框">
+        <el-form-item label="显示边框" class="chartC">
           <el-switch v-model="activeData.option.showBorder" />
         </el-form-item>
       </template>
-      <el-form-item label="选项">
+      <el-form-item label="选项" class="chartC">
         <el-button @click="showDataTodoData">设置</el-button>
       </el-form-item>
       <refresh :refresh="activeData.refresh" />
       <todo-data ref="todoData" v-if="todoDataVisible" @refresh="commonRefresh" />
-      <el-form-item label="名称大小">
+      <el-form-item label="名称大小" class="chartC">
         <el-input-number v-model="activeData.option.labelFontSize" controls-position="right"
           :min="12" :max="25" />
       </el-form-item>
-      <el-form-item label="名称加粗">
+      <el-form-item label="名称加粗" class="chartC">
         <el-switch v-model="activeData.option.labelFontWeight" />
       </el-form-item>
-      <el-form-item label="名称颜色" style="height:32px">
+      <el-form-item label="名称颜色" style="height:32px" class="chartC">
         <el-color-picker v-model="activeData.option.labelFontColor" />
       </el-form-item>
-      <el-form-item label="数值大小">
+      <el-form-item label="数值大小" class="chartC">
         <el-input-number v-model="activeData.option.valueFontSize" controls-position="right"
           :min="12" :max="25" />
       </el-form-item>
-      <el-form-item label="数值加粗">
+      <el-form-item label="数值加粗" class="chartC">
         <el-switch v-model="activeData.option.valueFontWeight" />
       </el-form-item>
-      <el-form-item label="数值颜色" style="height:32px">
+      <el-form-item label="数值颜色" style="height:32px" class="chartC">
         <el-color-picker v-model="activeData.option.valueFontColor" />
       </el-form-item>
-      <el-form-item label="数值背景色" v-if="showType=='app'" style="height:32px">
+      <el-form-item label="数值背景色" v-if="showType=='app'" style="height:32px" class="chartC">
         <el-color-picker v-model="activeData.option.valueFontBgColor" />
       </el-form-item>
     </template>
     <template v-if="activeData.jnpfKey == 'commonFunc'">
       <template v-if="showType=='app'">
-        <el-form-item label="风格类型">
+        <el-form-item label="风格类型" class="chartC">
           <el-select v-model="activeData.option.appStyleType" placeholder="请选择风格类型" filterable>
             <el-option v-for="(item, index) in appTodoStyleList" :key="index" :label="item.label"
               :value="item.value" />
           </el-select>
         </el-form-item>
         <template v-if="activeData.option.appStyleType==2">
-          <el-form-item label="每行选项数">
+          <el-form-item label="每行选项数" class="chartC">
             <el-input-number v-model="activeData.option.appRowNumber" controls-position="right"
               :min="1" :max="10" />
           </el-form-item>
-          <el-form-item label="显示边框">
+          <el-form-item label="显示边框" class="chartC">
             <el-switch v-model="activeData.option.appShowBorder" />
           </el-form-item>
         </template>
       </template>
       <template v-else>
-        <el-form-item label="每行选项数">
+        <el-form-item label="每行选项数" class="chartC">
           <el-input-number v-model="activeData.option.rowNumber" controls-position="right" :min="1"
             :max="10" />
         </el-form-item>
-        <el-form-item label="显示边框">
+        <el-form-item label="显示边框" class="chartC">
           <el-switch v-model="activeData.option.showBorder" />
         </el-form-item>
       </template>
-      <el-form-item label="选项">
+      <el-form-item label="选项" class="chartC">
         <el-button @click="showData('commonFunData','commonFunDataVisible')">设置</el-button>
       </el-form-item>
       <CommonFunData ref="commonFunData" :menuList="menuList" :appMenuList="appMenuList"
         :showType="showType" v-if="commonFunDataVisible" @refresh="refresh" />
-      <el-form-item label="图标位置" v-if="showType=='pc'">
+      <el-form-item label="图标位置" v-if="showType=='pc'" class="chartC">
         <el-radio-group v-model="activeData.option.styleType" size="small">
           <el-radio-button :label="item.value" v-for="(item,index) in commonFuncStyleList"
             :key="index">
@@ -401,92 +401,92 @@
           </el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="名称大小">
+      <el-form-item label="名称大小" class="chartC">
         <el-input-number v-model="activeData.option.labelFontSize" controls-position="right"
           :min="12" :max="25" />
       </el-form-item>
-      <el-form-item label="名称加粗">
+      <el-form-item label="名称加粗" class="chartC">
         <el-switch v-model="activeData.option.labelFontWeight" />
       </el-form-item>
-      <el-form-item label="名称颜色" style="height:32px">
+      <el-form-item label="名称颜色" style="height:32px" class="chartC">
         <el-color-picker v-model="activeData.option.labelFontColor" />
       </el-form-item>
     </template>
     <template v-if="activeData.jnpfKey == 'dataBoard'">
       <template v-if="showType=='app'">
-        <el-form-item label="风格类型">
+        <el-form-item label="风格类型" class="chartC">
           <el-select v-model="activeData.option.appStyleType" placeholder="请选择风格类型" filterable>
             <el-option v-for="(item, index) in appTodoStyleList" :key="index" :label="item.label"
               :value="item.value" />
           </el-select>
         </el-form-item>
         <template v-if="activeData.option.appStyleType==2">
-          <el-form-item label="每行选项数">
+          <el-form-item label="每行选项数" class="chartC">
             <el-input-number v-model="activeData.option.appRowNumber" controls-position="right"
               :min="1" :max="8" />
           </el-form-item>
-          <el-form-item label="显示边框">
+          <el-form-item label="显示边框" class="chartC">
             <el-switch v-model="activeData.option.appShowBorder" />
           </el-form-item>
         </template>
       </template>
       <template v-else>
-        <el-form-item label="每行选项数">
+        <el-form-item label="每行选项数" class="chartC">
           <el-input-number v-model="activeData.option.rowNumber" controls-position="right" :min="1"
             :max="8" />
         </el-form-item>
-        <el-form-item label="显示边框">
+        <el-form-item label="显示边框" class="chartC">
           <el-switch v-model="activeData.option.showBorder" />
         </el-form-item>
       </template>
       <el-divider>选项设置</el-divider>
-      <el-form-item label="数据类型">
+      <el-form-item label="数据类型" class="chartC">
         <el-radio-group v-model="activeData.dataType" size="small"
           @change="dataBoardDataTypeChange">
           <el-radio-button label="static">静态数据</el-radio-button>
           <el-radio-button label="dynamic">远端数据</el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="数据接口" v-if="activeData.dataType==='dynamic'">
+      <el-form-item label="数据接口" v-if="activeData.dataType==='dynamic'" class="chartC">
         <interface-dialog :value="activeData.propsApi" :title="activeData.propsName"
           popupTitle="数据接口" @change="propsApiChange" />
       </el-form-item>
       <Refresh v-if="activeData.dataType==='dynamic'" :refresh="activeData.refresh" />
-      <el-form-item label="选项">
+      <el-form-item label="选项" class="chartC">
         <el-button @click="showData('dataBoardData','dataBoardDataVisible')">设置</el-button>
       </el-form-item>
       <DataBoardData ref="dataBoardData" :menuList="menuList" :appMenuList="appMenuList"
         :interfaceId='activeData.propsApi' :type="activeData.dataType==='dynamic'?2:1"
         :showType="showType" v-if="dataBoardDataVisible" @refresh="refresh" />
       <el-divider>选项样式</el-divider>
-      <el-form-item label="名称大小">
+      <el-form-item label="名称大小" class="chartC">
         <el-input-number v-model="activeData.option.labelFontSize" controls-position="right"
           :min="12" :max="25" />
       </el-form-item>
-      <el-form-item label="名称加粗">
+      <el-form-item label="名称加粗" class="chartC">
         <el-switch v-model="activeData.option.labelFontWeight" />
       </el-form-item>
-      <el-form-item label="名称颜色" style="height:32px">
+      <el-form-item label="名称颜色" style="height:32px" class="chartC">
         <el-color-picker v-model="activeData.option.labelFontColor" />
       </el-form-item>
-      <el-form-item label="数值大小">
+      <el-form-item label="数值大小" class="chartC">
         <el-input-number v-model="activeData.option.valueFontSize" controls-position="right"
           :min="12" :max="25" />
       </el-form-item>
-      <el-form-item label="数值加粗">
+      <el-form-item label="数值加粗" class="chartC">
         <el-switch v-model="activeData.option.valueFontWeight" />
       </el-form-item>
-      <el-form-item label="数值颜色" style="height:32px">
+      <el-form-item label="数值颜色" style="height:32px" class="chartC">
         <el-color-picker v-model="activeData.option.valueFontColor" />
       </el-form-item>
-      <el-form-item label="单位大小">
+      <el-form-item label="单位大小" class="chartC">
         <el-input-number v-model="activeData.option.unitFontSize" controls-position="right"
           :min="12" :max="25" />
       </el-form-item>
-      <el-form-item label="单位加粗">
+      <el-form-item label="单位加粗" class="chartC">
         <el-switch v-model="activeData.option.unitFontWeight" />
       </el-form-item>
-      <el-form-item label="单位颜色" style="height:32px">
+      <el-form-item label="单位颜色" style="height:32px" class="chartC">
         <el-color-picker v-model="activeData.option.unitFontColor" />
       </el-form-item>
     </template>
@@ -598,13 +598,13 @@ export default {
     },
   },
   created() {
-    getAtlas().then((res) => {
-      this.cascaderOptions = res.data
-    })
-    this.fileList = []
-    if (this.activeData.jnpfKey == 'video' && this.activeData.option.defaultValue && this.activeData.option.styleType == 1) {
-      this.fileList = [this.activeData.option.defaultValue]
-    }
+    // getAtlas().then((res) => {
+    //   this.cascaderOptions = res.data
+    // })
+    // this.fileList = []
+    // if (this.activeData.jnpfKey == 'video' && this.activeData.option.defaultValue && this.activeData.option.styleType == 1) {
+    //   this.fileList = [this.activeData.option.defaultValue]
+    // }
   },
   methods: {
     initBarType() {
@@ -787,6 +787,14 @@ export default {
   }
   .option-drag {
     cursor: move;
+  }
+}
+
+</style>
+<style lang="css">
+.chartC {
+  .el-form-item__label {
+    color: #000 !important;
   }
 }
 </style>

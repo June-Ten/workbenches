@@ -1,36 +1,27 @@
 <template>
   <el-dialog :visible.sync="visible" fullscreen lock-scroll class="JNPF-full-dialog"
     :show-close="false" :modal="false">
-    <div class="JNPF-full-dialog-header">
+    <div class="JNPF-full-dialog-header2">
       <div class="header-title">
-        <img src="@/assets/images/jnpf.png" class="header-logo" />
+        <img src="@/assets/images/jnpf.png" class="header-logo2" />
         <el-tooltip class="item" effect="dark" :content="fullName" placement="top">
           <p class="header-txt"> · {{fullName}}</p>
         </el-tooltip>
       </div>
-      <el-radio-group v-model="showType" size="mini">
-        <el-radio-button label="pc">
-          <el-tooltip effect="dark" content="PC" placement="top">
-            <i class="icon-ym icon-ym-pc" />
-          </el-tooltip>
-        </el-radio-button>
-        <el-radio-button label="app">
-          <el-tooltip effect="dark" content="APP" placement="top">
-            <i class="icon-ym icon-ym-mobile" />
-          </el-tooltip>
-        </el-radio-button>
-      </el-radio-group>
       <div class="options">
         <el-tooltip effect="dark" content="撤销" placement="top">
-          <el-link icon="icon-ym icon-ym-report-icon-undo" :underline="false" class="active-btn"
+<!--          <el-link icon="icon-ym icon-ym-report-icon-undo" :underline="false" class="active-btn"-->
+          <el-link icon="icon-ym el-icon-back" :underline="false" class="active-btn"
             :disabled="!getCanUndo" @click="handleRedoAndUndo('handleUndo')" />
         </el-tooltip>
         <el-tooltip effect="dark" content="重做" placement="top">
-          <el-link icon="icon-ym icon-ym-report-icon-restore" :underline="false" class="active-btn"
+<!--          <el-link icon="icon-ym icon-ym-report-icon-restore" :underline="false" class="active-btn"-->
+          <el-link icon="icon-ym el-icon-right" :underline="false" class="active-btn"
             :disabled="!getCanRedo" @click="handleRedoAndUndo('handleRedo')" />
         </el-tooltip>
         <el-tooltip effect="dark" content="清空" placement="top">
-          <el-link icon="icon-ym icon-ym-clean" :underline="false" @click="empty"
+<!--          <el-link icon="icon-ym icon-ym-clean" :underline="false" @click="empty"-->
+          <el-link icon="icon-ym el-icon-delete-solid" :underline="false" @click="empty"
             class="active-btn" />
         </el-tooltip>
         <el-tooltip effect="dark" content="预览" placement="top">
@@ -54,7 +45,7 @@
 </template>
 
 <script>
-import { getPortalInfo, Update, Create } from '@/api/onlineDev/portal'
+import { createPortalInfo ,getPortalXXInfo} from '@/api/onlineDev/portal'
 import PortalDesigner from './components'
 import useRedoMixins from '@/components/VisualPortal/mixins/useRedo'
 import ReleaseDialog from '@/views/onlineDev/visualPortal/releaseDialog'
@@ -91,9 +82,9 @@ export default {
       this.$nextTick(() => {
         if (this.currRow.id) {
           this.loading = true
-          getPortalInfo(this.currRow.id).then(res => {
+          getPortalXXInfo(this.currRow.id).then(res => {
             this.loading = false
-            this.formData = JSON.parse(res.data.formData)
+            this.formData = JSON.parse(res.data.data.formData)
           }).catch(() => { this.loading = false })
         }
       })
@@ -107,7 +98,7 @@ export default {
           formData: JSON.stringify(this.formData),
           id: this.currRow.id
         }
-        const formMethod = this.currRow.id ? Update : Create
+        const formMethod = this.currRow.id ? createPortalInfo : createPortalInfo
         formMethod(query).then((res) => {
           this.$message({
             message: res.msg,
@@ -151,7 +142,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 ::v-deep .options {
-  width: 500px !important;
+  width: 1650px !important;
+  text-align: right;
 }
 .unActive {
   width: 30px;
@@ -179,5 +171,76 @@ export default {
 }
 ::v-deep .el-radio-button__inner {
   padding: 7px 10px !important;
+}
+
+.header-logo2 {
+  width: auto;
+  height: 40px;
+  vertical-align: top;
+  margin-right: 3px;
+  font-size: 30px;
+  color: #fff;
+}
+
+
+.JNPF-full-dialog-header2 {
+  padding: 0 10px;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .header-title {
+    height: 60px;
+    width: 410px;
+    display: flex;
+    align-items: center;
+  }
+
+  .header-logo {
+    width: auto;
+    height: 60px;
+    vertical-align: top;
+    margin-right: 3px;
+    font-size: 30px;
+    color: #fff;
+  }
+
+  .header-txt {
+    display: inline-block;
+    margin: 0;
+    color: #333;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    cursor: pointer;
+  }
+
+  .steps {
+    width: 450px;
+    padding: 6px 20px;
+    background: #fff;
+    justify-items: flex-start;
+    flex-shrink: 0;
+
+    &.steps2 {
+      width: 300px;
+    }
+
+    &.steps4 {
+      width: 600px;
+    }
+
+    .el-step__title {
+      cursor: pointer;
+    }
+  }
+
+  .options {
+    width: 410px;
+    text-align: right;
+  }
 }
 </style>

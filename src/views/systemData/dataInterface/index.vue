@@ -1,24 +1,24 @@
 <template>
   <div class="JNPF-common-layout">
-    <div class="JNPF-common-layout-left">
-      <div class="JNPF-common-title">
-        <h2>接口分类</h2>
-        <el-dropdown>
-          <el-link icon="icon-ym icon-ym-mpMenu" :underline="false" />
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="initData()">刷新数据</el-dropdown-item>
-            <el-dropdown-item @click.native="toggleTreeExpand(true)">展开全部</el-dropdown-item>
-            <el-dropdown-item @click.native="toggleTreeExpand(false)">折叠全部</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </div>
-      <el-scrollbar class="JNPF-common-el-tree-scrollbar" v-loading="treeLoading">
-        <el-tree ref="treeBox" :data="treeData" :props="defaultProps"
-          :default-expand-all="expandsTree" highlight-current :expand-on-click-node="false"
-          node-key="id" @node-click="handleNodeClick" class="JNPF-common-el-tree"
-          v-if="refreshTree" />
-      </el-scrollbar>
-    </div>
+<!--    <div class="JNPF-common-layout-left">-->
+<!--      <div class="JNPF-common-title">-->
+<!--        <h2>接口分类</h2>-->
+<!--        <el-dropdown>-->
+<!--          <el-link icon="icon-ym icon-ym-mpMenu" :underline="false" />-->
+<!--          <el-dropdown-menu slot="dropdown">-->
+<!--            <el-dropdown-item @click.native="initData()">刷新数据</el-dropdown-item>-->
+<!--            <el-dropdown-item @click.native="toggleTreeExpand(true)">展开全部</el-dropdown-item>-->
+<!--            <el-dropdown-item @click.native="toggleTreeExpand(false)">折叠全部</el-dropdown-item>-->
+<!--          </el-dropdown-menu>-->
+<!--        </el-dropdown>-->
+<!--      </div>-->
+<!--      <el-scrollbar class="JNPF-common-el-tree-scrollbar" v-loading="treeLoading">-->
+<!--        <el-tree ref="treeBox" :data="treeData" :props="defaultProps"-->
+<!--          :default-expand-all="expandsTree" highlight-current :expand-on-click-node="false"-->
+<!--          node-key="id" @node-click="handleNodeClick" class="JNPF-common-el-tree"-->
+<!--          v-if="refreshTree" />-->
+<!--      </el-scrollbar>-->
+<!--    </div>-->
     <div class="JNPF-common-layout-center">
       <el-row class="JNPF-common-search-box" :gutter="16">
         <el-form @submit.native.prevent>
@@ -147,16 +147,16 @@ export default {
   methods: {
     initData(isInit) {
       this.treeLoading = true
-      this.$store.dispatch('base/getDictionaryData', { sort: 'DataInterfaceType' }).then((res) => {
-        this.treeData = res
-        if (!this.treeData.length) return this.treeLoading = false
+      // this.$store.dispatch('base/getDictionaryData', { sort: 'DataInterfaceType' }).then((res) => {
+      //   this.treeData = res
+      //   if (!this.treeData.length) return this.treeLoading = false
         this.$nextTick(() => {
-          if (isInit) this.listQuery.category = this.treeData[0].id
-          this.$refs.treeBox.setCurrentKey(this.listQuery.category)
-          this.treeLoading = false
+          // if (isInit) this.listQuery.category = this.treeData[0].id
+          // this.$refs.treeBox.setCurrentKey(this.listQuery.category)
+          // this.treeLoading = false
           if (isInit) this.getList()
         })
-      })
+      // })
     },
     toggleTreeExpand(expands) {
       this.refreshTree = false

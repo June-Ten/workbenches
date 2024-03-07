@@ -2,15 +2,15 @@
   <el-collapse-item title="自定义配色设置" name="11">
     <template
       v-if="activeData.jnpfKey != 'pieChart'&&activeData.jnpfKey != 'radarChart'&&showType=='pc'">
-      <el-form-item label="文字颜色" style="height:32px">
+      <el-form-item label="文字颜色" style="height:32px" class="zztC">
         <el-color-picker v-model="activeData.option.AxisTextStyleColor" />
       </el-form-item>
-      <el-form-item label="轴线颜色" style="height:32px">
+      <el-form-item label="轴线颜色" style="height:32px" class="zztC">
         <el-color-picker v-model="activeData.option.AxisLineStyleColor" />
       </el-form-item>
     </template>
     <el-table :data="activeData.option.colorList">
-      <el-table-column prop="fullName" label="颜色">
+      <el-table-column prop="fullName" label="颜色" >
         <template slot-scope="scope">
           <el-color-picker v-model="scope.row.color1" />
         </template>
@@ -53,3 +53,10 @@ export default {
   }
 }
 </script>
+<style lang="css">
+.zztC {
+  .el-form-item__label {
+    color: #000 !important;
+  }
+}
+</style>
