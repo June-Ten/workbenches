@@ -720,7 +720,7 @@ export const basicComponents = [
     styleType: 1,
     defaultValue: [
       {
-        imageUrl: "https://app.cdn.jnpfsoft.com/image/3.2/banner1.png",
+        imageUrl: "img/bg.jpg",
         dataType: 2,
         propsApi: '',
         moduleId: "",
@@ -731,7 +731,7 @@ export const basicComponents = [
         id: '1'
       },
       {
-        imageUrl: "https://app.cdn.jnpfsoft.com/image/3.2/banner2.png",
+        imageUrl: "img/screen.png",
         dataType: 2,
         propsApi: '',
         moduleId: "",
@@ -742,7 +742,7 @@ export const basicComponents = [
         id: '2'
       },
       {
-        imageUrl: "https://app.cdn.jnpfsoft.com/image/3.2/banner4.png",
+        imageUrl: "img/img-default.png",
         dataType: 2,
         propsApi: '',
         moduleId: "",

@@ -321,9 +321,12 @@ export default {
     },
     getDefaultValue(row) {
       const jnpfKey = row.jnpfKey
-      if (jnpfKey == 'text') return "开发平台"
-      if (jnpfKey == 'image') return "https://app.cdn.jnpfsoft.com/image/3.2/banner1.png"
-      if (jnpfKey == 'video') return "https://cdn.jnpfsoft.com/2022/video/index_video.mp4"
+      console.log(jnpfKey)
+      if (jnpfKey == 'text') return "defaultText"
+      // if (jnpfKey == 'image') return "https://app.cdn.jnpfsoft.com/image/3.2/banner1.png"
+      if (jnpfKey == 'image') return "/img/new-project.png"
+      // if (jnpfKey == 'video') return "https://cdn.jnpfsoft.com/2022/video/index_video.mp4"
+      if (jnpfKey == 'video') return "/img/screen.png"
       if (jnpfKey == 'barChart' || jnpfKey == 'lineChart' || jnpfKey == 'pieChart') return chartData.baseBarData
       if (jnpfKey == 'radarChart') return chartData.radarData
       if (jnpfKey == 'mapChart') return mapChartData
