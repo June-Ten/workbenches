@@ -1,38 +1,39 @@
 <template>
   <div class="JNPF-common-layout">
-<!--    <div class="JNPF-common-layout-left">-->
-<!--      <div class="JNPF-common-title">-->
-<!--        <h2>接口分类</h2>-->
-<!--        <el-dropdown>-->
-<!--          <el-link icon="icon-ym icon-ym-mpMenu" :underline="false" />-->
-<!--          <el-dropdown-menu slot="dropdown">-->
-<!--            <el-dropdown-item @click.native="initData()">刷新数据</el-dropdown-item>-->
-<!--            <el-dropdown-item @click.native="toggleTreeExpand(true)">展开全部</el-dropdown-item>-->
-<!--            <el-dropdown-item @click.native="toggleTreeExpand(false)">折叠全部</el-dropdown-item>-->
-<!--          </el-dropdown-menu>-->
-<!--        </el-dropdown>-->
-<!--      </div>-->
-<!--      <el-scrollbar class="JNPF-common-el-tree-scrollbar" v-loading="treeLoading">-->
-<!--        <el-tree ref="treeBox" :data="treeData" :props="defaultProps"-->
-<!--          :default-expand-all="expandsTree" highlight-current :expand-on-click-node="false"-->
-<!--          node-key="id" @node-click="handleNodeClick" class="JNPF-common-el-tree"-->
-<!--          v-if="refreshTree" />-->
-<!--      </el-scrollbar>-->
-<!--    </div>-->
+    <!--    <div class="JNPF-common-layout-left">-->
+    <!--      <div class="JNPF-common-title">-->
+    <!--        <h2>接口分类</h2>-->
+    <!--        <el-dropdown>-->
+    <!--          <el-link icon="icon-ym icon-ym-mpMenu" :underline="false" />-->
+    <!--          <el-dropdown-menu slot="dropdown">-->
+    <!--            <el-dropdown-item @click.native="initData()">刷新数据</el-dropdown-item>-->
+    <!--            <el-dropdown-item @click.native="toggleTreeExpand(true)">展开全部</el-dropdown-item>-->
+    <!--            <el-dropdown-item @click.native="toggleTreeExpand(false)">折叠全部</el-dropdown-item>-->
+    <!--          </el-dropdown-menu>-->
+    <!--        </el-dropdown>-->
+    <!--      </div>-->
+    <!--      <el-scrollbar class="JNPF-common-el-tree-scrollbar" v-loading="treeLoading">-->
+    <!--        <el-tree ref="treeBox" :data="treeData" :props="defaultProps"-->
+    <!--          :default-expand-all="expandsTree" highlight-current :expand-on-click-node="false"-->
+    <!--          node-key="id" @node-click="handleNodeClick" class="JNPF-common-el-tree"-->
+    <!--          v-if="refreshTree" />-->
+    <!--      </el-scrollbar>-->
+    <!--    </div>-->
     <div class="JNPF-common-layout-center">
       <el-row class="JNPF-common-search-box" :gutter="16">
         <el-form @submit.native.prevent>
           <el-col :span="6">
             <el-form-item label="关键词">
               <el-input v-model="listQuery.keyword" placeholder="请输入关键词查询" clearable
-                @keyup.enter.native="search()" />
+                        @keyup.enter.native="search()"/>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item>
               <el-button type="primary" icon="el-icon-search" @click="search()">
-                {{$t('common.search')}}</el-button>
-              <el-button icon="el-icon-refresh-right" @click="reset()">{{$t('common.reset')}}
+                {{ $t('common.search') }}
+              </el-button>
+              <el-button icon="el-icon-refresh-right" @click="reset()">{{ $t('common.reset') }}
               </el-button>
             </el-form-item>
           </el-col>
@@ -42,30 +43,31 @@
         <div class="JNPF-common-head">
           <topOpts @add="addOrUpdateHandle()">
             <upload-btn url="/api/system/DataInterface/Actions/Import" accept=".bd"
-              @on-success="getList" />
+                        @on-success="getList"/>
           </topOpts>
           <div class="JNPF-common-head-right">
             <el-tooltip effect="dark" :content="$t('common.refresh')" placement="top">
               <el-link icon="icon-ym icon-ym-Refresh JNPF-common-head-icon" :underline="false"
-                @click="getList()" />
+                       @click="getList()"/>
             </el-tooltip>
           </div>
         </div>
         <JNPF-table v-loading="listLoading" :data="tableData">
-          <el-table-column prop="fullName" label="名称" />
-          <el-table-column prop="enCode" label="编码" />
+          <el-table-column prop="fullName" label="名称"/>
+          <el-table-column prop="enCode" label="编码"/>
           <el-table-column prop="dataType" label="类型" width="100">
             <template slot-scope="scope">
               <span>{{ scope.row.type }}</span>
             </template>
           </el-table-column>
           <el-table-column prop="creatorTime" label="创建时间" :formatter="jnpf.tableDateFormat"
-            width="120" />
-          <el-table-column prop="sortCode" label="排序" width="70" align="center" />
+                           width="120"/>
+          <el-table-column prop="sortCode" label="排序" width="70" align="center"/>
           <el-table-column prop="enabledMark" label="状态" width="70" align="center">
             <template slot-scope="scope">
               <el-tag :type="scope.row.enabledMark == 1 ? 'success' : 'danger'" disable-transitions>
-                {{scope.row.enabledMark==1?'启用':'禁用'}}</el-tag>
+                {{ scope.row.enabledMark == 1 ? '启用' : '禁用' }}
+              </el-tag>
             </template>
           </el-table-column>
           <el-table-column label="操作" width="150">
@@ -73,7 +75,7 @@
               <tableOpts @edit="addOrUpdateHandle(scope.row.id)" @del="handleDel(scope.row.id)">
                 <el-dropdown hide-on-click>
                   <span class="el-dropdown-link">
-                    <el-button type="text" size="mini">{{$t('common.moreBtn')}}<i
+                    <el-button type="text" size="mini">{{ $t('common.moreBtn') }}<i
                         class="el-icon-arrow-down el-icon--right"></i>
                     </el-button>
                   </span>
@@ -82,7 +84,8 @@
                     <el-dropdown-item @click.native="handleCopy(scope.row.id)">复制</el-dropdown-item>
                     <el-dropdown-item @click.native="exportData(scope.row.id)">导出</el-dropdown-item>
                     <el-dropdown-item @click.native="variableData(scope.row.id)"
-                      v-if="scope.row.isPostPosition == 1">变量</el-dropdown-item>
+                                      v-if="scope.row.isPostPosition == 1">变量
+                    </el-dropdown-item>
                   </el-dropdown-menu>
                 </el-dropdown>
               </tableOpts>
@@ -90,30 +93,26 @@
           </el-table-column>
         </JNPF-table>
         <pagination :total="total" :page.sync="listQuery.currentPage"
-          :limit.sync="listQuery.pageSize" @pagination="getList" />
+                    :limit.sync="listQuery.pageSize" @pagination="getList"/>
       </div>
     </div>
-    <Form v-if="formVisible" ref="Form" @close="closeForm" />
-    <Log v-show="logVisible" ref="Log" @close="logVisible=false" />
-    <Preview v-if="previewVisible" ref="Preview" @close="closePreview" />
-    <Variable v-if="isVisible" ref="variable" @close="closeVariable" />
+    <Form v-if="formVisible" ref="Form" @close="closeForm"/>
+    <Log v-show="logVisible" ref="Log" @close="logVisible=false"/>
+    <Preview v-if="previewVisible" ref="Preview" @close="closePreview"/>
+    <Variable v-if="isVisible" ref="variable" @close="closeVariable"/>
   </div>
 </template>
 <script>
-import {
-  getDataInterfaceList,
-  updateDataInterfaceState,
-  delDataInterface,
-  exportData,
-  copy
-} from '@/api/systemData/dataInterface'
+
 import Form from './Form'
 import Preview from './Preview'
 import Variable from './components/variable/index.vue'
 import Log from './Log'
+import {getDIFList, loginJk , delDIF} from "@/api/portal";
+
 export default {
   name: 'systemData-dataInterface',
-  components: { Form, Preview, Log, Variable },
+  components: {Form, Preview, Log, Variable},
   data() {
     return {
       defaultProps: {
@@ -142,20 +141,21 @@ export default {
     }
   },
   created() {
-    this.initData(true)
+    this.initData()
   },
   methods: {
-    initData(isInit) {
-      this.treeLoading = true
-      // this.$store.dispatch('base/getDictionaryData', { sort: 'DataInterfaceType' }).then((res) => {
-      //   this.treeData = res
-      //   if (!this.treeData.length) return this.treeLoading = false
-        this.$nextTick(() => {
-          // if (isInit) this.listQuery.category = this.treeData[0].id
-          // this.$refs.treeBox.setCurrentKey(this.listQuery.category)
-          // this.treeLoading = false
-          if (isInit) this.getList()
-        })
+    initData() {
+     this.getList()
+      // this.treeLoading = true
+      // // this.$store.dispatch('base/getDictionaryData', { sort: 'DataInterfaceType' }).then((res) => {
+      // //   this.treeData = res
+      // //   if (!this.treeData.length) return this.treeLoading = false
+      // //   this.$nextTick(() => {
+      //     // if (isInit) this.listQuery.category = this.treeData[0].id
+      //     // this.$refs.treeBox.setCurrentKey(this.listQuery.category)
+      //     // this.treeLoading = false
+      //     if (isInit) this.getList()
+      // })
       // })
     },
     toggleTreeExpand(expands) {
@@ -169,16 +169,28 @@ export default {
       })
     },
     getList() {
-      this.listLoading = true
-      getDataInterfaceList(this.listQuery).then(res => {
-        this.tableData = res.data.list
-        this.total = res.data.pagination.total
-        this.listLoading = false
-        this.btnLoading = false
-      }).catch(() => {
+      loginJk().then(res => {
+        let BearerToken = res.data.BearerToken
+        localStorage.setItem('Authorization', BearerToken)
+      })
+
+      getDIFList().then(res => {
+        this.tableData = res.data.data.list
+        this.total = res.data.data.pagination.total
         this.listLoading = false
         this.btnLoading = false
       })
+      // this.listLoading = true
+      // // getDataInterfaceList(this.listQuery).then(res => {
+      // getDataInterfaceList().then(res => {
+      //   // this.tableData = res.data.list
+      //   // this.total = res.data.pagination.total
+      //   // this.listLoading = false
+      //   // this.btnLoading = false
+      // }).catch(() => {
+      //   this.listLoading = false
+      //   this.btnLoading = false
+      // })
     },
     viewLog(row) {
       this.logVisible = true
@@ -201,7 +213,8 @@ export default {
             }
           })
         })
-      }).catch(() => { })
+      }).catch(() => {
+      })
     },
     handleNodeClick(data) {
       if (this.listQuery.category === data.id) return
@@ -218,7 +231,8 @@ export default {
       this.$confirm(this.$t('common.delTip'), this.$t('common.tipTitle'), {
         type: 'warning'
       }).then(() => {
-        delDataInterface(id).then(res => {
+        delDIF(id).then(res => {
+          console.log(res)
           this.$message({
             type: 'success',
             message: res.msg,
@@ -228,10 +242,11 @@ export default {
             }
           })
         })
-      }).catch(() => { })
+      }).catch(() => {
+      })
     },
     handlePreview(row) {
-      const { id, enabledMark, tenantId, fullName } = row
+      const {id, enabledMark, tenantId, fullName} = row
       if (enabledMark === 0) {
         this.$message.error('接口已被禁用，请先开启接口')
       } else {
@@ -255,7 +270,8 @@ export default {
             }
           });
         })
-      }).catch(() => { });
+      }).catch(() => {
+      });
     },
     search() {
       this.listQuery.currentPage = 1
@@ -298,7 +314,8 @@ export default {
         exportData(id).then(res => {
           this.jnpf.downloadFile(res.data.url)
         })
-      }).catch(() => { });
+      }).catch(() => {
+      });
     }
   }
 }

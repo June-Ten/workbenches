@@ -62,11 +62,11 @@ export default {
           name: '门户设计',
           path: '/portal'
         }
-        // , {
-        //   icon: 'el-icon-thumb',
-        //   name: '远端数据',
-        //   path: '/outData'
-        // }
+        , {
+          icon: 'el-icon-eleme',
+          name: '远端数据',
+          path: '/outData'
+        }
       ],
       activeNav: null,
       activeIndex: 0,

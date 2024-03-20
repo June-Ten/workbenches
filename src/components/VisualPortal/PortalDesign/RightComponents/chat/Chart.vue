@@ -104,7 +104,7 @@
       <el-form-item label="数据类型" class="chartC">
         <el-radio-group v-model="activeData.dataType" size="small" @change="dataTypeChange">
           <el-radio-button label="static">静态数据</el-radio-button>
-          <el-radio-button label="dynamic">远端数据</el-radio-button>
+          <el-radio-button label="dynamic">远端数据1111</el-radio-button>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="文本内容" v-if="activeData.dataType=='static'" class="chartC">
@@ -452,8 +452,8 @@
           popupTitle="数据接口" @change="propsApiChange" />
       </el-form-item>
       <Refresh v-if="activeData.dataType==='dynamic'" :refresh="activeData.refresh" />
-      <el-form-item label="选项" class="chartC">
-        <el-button @click="showData('dataBoardData','dataBoardDataVisible')">设置</el-button>
+      <el-form-item label="选项111" class="chartC">
+        <el-button @click="showData('dataBoardData','dataBoardDataVisible')">设置111</el-button>
       </el-form-item>
       <DataBoardData ref="dataBoardData" :menuList="menuList" :appMenuList="appMenuList"
         :interfaceId='activeData.propsApi' :type="activeData.dataType==='dynamic'?2:1"
@@ -726,6 +726,7 @@ export default {
       this.renderKeyChange()
     },
     propsApiChange(val, item) {
+      alert(333)
       if (val) {
         this.activeData.propsApi = val
         this.activeData.propsName = item.fullName

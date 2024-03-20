@@ -102,6 +102,8 @@
 <script>
 import CardHeader from "../CardHeader"
 import { getDataInterfaceRes } from '@/api/systemData/dataInterface'
+import {getDIFList, getDIFP} from "@/api/portal";
+
 export default {
   components: { CardHeader },
   props: {
@@ -146,8 +148,9 @@ export default {
       if (this.activeData.dataType === 'dynamic') {
         const propsApi = this.activeData.propsApi
         if (!propsApi) return this.option.defaultValue = ''
-        getDataInterfaceRes(propsApi).then(res => {
-          this.defaultValue = res.data
+        // getDataInterfaceRes(propsApi).then(res => {
+        getDIFP(propsApi).then(res => {
+          this.defaultValue = res.data.data
           this.defaultValue = this.defaultValue.slice(0, tableCount || 50)
         })
       }

@@ -17,13 +17,13 @@
       class="JNPF-dialog JNPF-dialog_center JNPF-dialog-tree-select" lock-scroll append-to-body
       width="1000px">
       <div class="JNPF-common-layout">
-        <div class="JNPF-common-layout-left">
-          <el-scrollbar class="JNPF-common-el-tree-scrollbar" v-loading="treeLoading">
-            <el-tree ref="treeBox" :data="treeData" :props="defaultProps" default-expand-all
-              highlight-current :expand-on-click-node="false" node-key="id"
-              @node-click="handleNodeClick" class="JNPF-common-el-tree" />
-          </el-scrollbar>
-        </div>
+<!--        <div class="JNPF-common-layout-left">-->
+<!--          <el-scrollbar class="JNPF-common-el-tree-scrollbar" v-loading="treeLoading">-->
+<!--            <el-tree ref="treeBox" :data="treeData" :props="defaultProps" default-expand-all-->
+<!--              highlight-current :expand-on-click-node="false" node-key="id"-->
+<!--              @node-click="handleNodeClick" class="JNPF-common-el-tree" />-->
+<!--          </el-scrollbar>-->
+<!--        </div>-->
         <div class="JNPF-common-layout-center">
           <el-row class="JNPF-common-search-box" :gutter="16">
             <el-form @submit.native.prevent>
@@ -108,7 +108,8 @@
 </template>
 
 <script>
-import { getDataInterfaceSelectorList } from '@/api/systemData/dataInterface'
+import {getDIFList } from "@/api/portal";
+
 export default {
   components: {},
   props: {
@@ -186,21 +187,22 @@ export default {
   methods: {
     initData() {
       this.listLoading = true
-      const query = {
-        ...this.listQuery,
-        ...this.query,
-        type: !this.dataType ? this.query.dataType : this.dataType,
-        hasPage: this.hasPage
-      }
-      this.$emit('clearValidate')
-      getDataInterfaceSelectorList(query).then(res => {
-        this.list = res.data.list.map(o => {
+      // const query = {
+      //   ...this.listQuery,
+      //   ...this.query,
+      //   type: !this.dataType ? this.query.dataType : this.dataType,
+      //   hasPage: this.hasPage
+      // }
+      // this.$emit('clearValidate')
+      // getDataInterfaceSelectorList(query).then(res => {
+      getDIFList().then(res => {
+        this.list = res.data.data.list.map(o => {
           let templateJson = o.parameterJson ? JSON.parse(o.parameterJson) : []
           if (!templateJson) templateJson = []
           let item = { templateJson, ...o }
           return item
         })
-        this.total = res.data.pagination.total
+        this.total = res.data.data.pagination.total
         this.listLoading = false
       }).catch(() => { this.listLoading = false })
     },
@@ -215,9 +217,9 @@ export default {
       this.search()
     },
     search() {
-      this.listQuery.currentPage = 1
-      this.listQuery.pageSize = 20
-      this.listQuery.sort = 'desc'
+      // this.listQuery.currentPage = 1
+      // this.listQuery.pageSize = 20
+      // this.listQuery.sort = 'desc'
       this.initData()
     },
     openDialog() {
@@ -226,16 +228,16 @@ export default {
       this.visible = true
       this.treeLoading = true
       this.listLoading = true
-      this.$store.dispatch('base/getDictionaryData', { sort: 'DataInterfaceType' }).then((res) => {
-        this.treeData = res
-        if (!this.treeData.length) return this.treeLoading = false
-        this.$nextTick(() => {
-          this.query.category = this.treeData[0].id
-          this.$refs.treeBox.setCurrentKey(this.query.category)
-          this.treeLoading = false
+      // this.$store.dispatch('base/getDictionaryData', { sort: 'DataInterfaceType' }).then((res) => {
+      //   this.treeData = res
+      //   if (!this.treeData.length) return this.treeLoading = false
+      //   this.$nextTick(() => {
+      //     this.query.category = this.treeData[0].id
+      //     this.$refs.treeBox.setCurrentKey(this.query.category)
+      //     this.treeLoading = false
           this.reset()
-        })
-      })
+      //   })
+      // })
     },
     clear() {
       this.checked = ''

@@ -31,6 +31,7 @@
 import { getDataInterfaceRes } from '@/api/systemData/dataInterface'
 import CardHeader from "../CardHeader"
 import webLink from '../Link'
+import {getDIFP} from "@/api/portal";
 export default {
   components: { CardHeader, webLink },
   props: {
@@ -61,15 +62,16 @@ export default {
   },
   methods: {
     initData() {
-
+      alert(999)
       let list = JSON.parse(JSON.stringify(this.option.defaultValue)) || []
       if (this.activeData.dataType == 'dynamic') {
         for (let i = 0; i < list.length; i++) {
           list[i].num = '';
         }
         if (!this.activeData.propsApi) return;
-        getDataInterfaceRes(this.activeData.propsApi).then(res => {
-          for (let i = 0; i < list.length; i++) {
+        getDIFP(this.activeData.propsApi).then(res => {
+          // getDIFP(propsApi).then(res => {
+            for (let i = 0; i < list.length; i++) {
             list[i].num = list[i].field ? res.data[list[i].field] || '' : '';
           }
         });

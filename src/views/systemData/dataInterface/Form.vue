@@ -14,8 +14,9 @@
         <el-button @click="goBack">{{$t('common.cancelButton')}}</el-button>
       </div>
     </div>
-    <!-- 基本信息 -->
-    <el-form ref="dataForm" :model="dataForm" :rules="dataRule" v-loading="formLoading"
+     基本信息
+<!--    <el-form ref="dataForm" :model="dataForm" :rules="dataRule" v-loading="formLoading"-->
+    <el-form ref="dataForm" :model="dataForm"  v-loading="formLoading"
       label-width="100px" v-if="active === 0" :key="key">
       <el-row>
         <el-col :span="14" :offset="5" class="baseInfo mt-20">
@@ -25,10 +26,10 @@
           <el-form-item label="编码" prop="enCode">
             <el-input v-model="dataForm.enCode" placeholder="输入编码" maxlength="50" />
           </el-form-item>
-          <el-form-item label="分类" prop="category">
-            <JnpfTreeSelect v-model="dataForm.category" :options="selectData" placeholder="选择分类"
-              clearable />
-          </el-form-item>
+<!--          <el-form-item label="分类" prop="category">-->
+<!--            <JnpfTreeSelect v-model="dataForm.category" :options="selectData" placeholder="选择分类"-->
+<!--              clearable />-->
+<!--          </el-form-item>-->
           <el-form-item label="类型" prop="type">
             <el-radio-group v-model="dataForm.type" @change="onDataTypeChange">
               <el-radio :label="2">静态数据</el-radio>
@@ -51,29 +52,29 @@
           <el-form-item label="状态" prop="enabledMark">
             <el-switch v-model="dataForm.enabledMark" :active-value="1" :inactive-value="0" />
           </el-form-item>
-          <el-form-item label="分页"
-            v-if="dataForm.type != 2 && (dataForm.type != 2 && dataForm.action == 3)">
-            <el-switch v-model="dataForm.hasPage" :active-value="1" :inactive-value="0"
-              :disabled="dataForm.isPostPosition ==1 || hasPageDisabled"
-              @change="onHasPageChange" />
-            <span class="page-explain" @click="handleShowPageExplain">分页使用说明</span>
-          </el-form-item>
-          <el-form-item prop="isPostPosition">
-            <span slot="label">鉴权
-              <el-tooltip content="开启后作为鉴权接口" placement="top">
-                <a class="el-icon-question tooltip-question"></a>
-              </el-tooltip>
-            </span>
-            <el-switch v-model="dataForm.isPostPosition" :active-value="1" :inactive-value="0"
-              :disabled="!!dataForm.id||dataForm.hasPage==1" @change="onIsPostPositionChange" />
-          </el-form-item>
+<!--          <el-form-item label="分页"-->
+<!--            v-if="dataForm.type != 2 && (dataForm.type != 2 && dataForm.action == 3)">-->
+<!--            <el-switch v-model="dataForm.hasPage" :active-value="1" :inactive-value="0"-->
+<!--              :disabled="dataForm.isPostPosition ==1 || hasPageDisabled"-->
+<!--              @change="onHasPageChange" />-->
+<!--            <span class="page-explain" @click="handleShowPageExplain">分页使用说明</span>-->
+<!--          </el-form-item>-->
+<!--          <el-form-item prop="isPostPosition">-->
+<!--            <span slot="label">鉴权-->
+<!--              <el-tooltip content="开启后作为鉴权接口" placement="top">-->
+<!--                <a class="el-icon-question tooltip-question"></a>-->
+<!--              </el-tooltip>-->
+<!--            </span>-->
+<!--            <el-switch v-model="dataForm.isPostPosition" :active-value="1" :inactive-value="0"-->
+<!--              :disabled="!!dataForm.id||dataForm.hasPage==1" @change="onIsPostPositionChange" />-->
+<!--          </el-form-item>-->
           <el-form-item label="说明" prop="description">
             <el-input v-model="dataForm.description" type="textarea" :rows="3" />
           </el-form-item>
         </el-col>
       </el-row>
     </el-form>
-    <!-- sql语句 -->
+     sql语句
     <div class="config" v-if="getShowSqlBox()">
       <div class="tableData">
         <el-select v-model="dataConfigJson.sqlData.dbLinkId" placeholder="选择数据库" filterable
@@ -181,7 +182,7 @@
         </div>
       </template>
     </div>
-    <!-- 静态数据数据处理 -->
+     静态数据数据处理
     <div class="config" v-if="active === 1 && dataForm.type === 2">
       <div class="detail">
         <div class="middle-pane">
@@ -214,113 +215,113 @@
         </div>
       </div>
     </div>
-    <!-- api操作 -->
-    <div class="config" v-if="getShowApiBox()">
-      <div class="detail api_detail">
-        <div class="middle-pane">
-          <div class="right-pane-list">
-            <div class="requestMethod">
-              <el-form ref="dataForm" :model="apiData" :rules="dataRule">
-                <el-form-item prop="url" label="">
-                  <el-input placeholder="请输入接口地址" v-model="apiData.url">
-                    <el-select v-model="apiData.method" slot="prepend" placeholder="请选择">
-                      <el-option label="GET" :value="1"></el-option>
-                      <el-option label="POST" :value="2"></el-option>
-                    </el-select>
-                  </el-input>
-                </el-form-item>
-              </el-form>
-            </div>
-            <p class="textBlock">请求参数</p>
-            <div class="tabsBlock">
-              <el-tabs v-model="activeKey" @tab-click="tabsHandleClick">
-                <el-tab-pane label="Header" name="0"></el-tab-pane>
-                <el-tab-pane label="Query" name="1"></el-tab-pane>
-                <el-tab-pane label="Body" name="2"></el-tab-pane>
-              </el-tabs>
-            </div>
-            <div class="radio-group-block" v-if="activeKey == 2">
-              <el-radio-group v-model="apiData.bodyType" @change="onBtnTypeChange" :key="key2">
-                <el-radio :label="0">none</el-radio>
-                <el-radio :label="1">form-data</el-radio>
-                <el-radio :label="2">x-www-form-urlencoded</el-radio>
-                <el-radio :label="3">json</el-radio>
-                <el-radio :label="4">xml</el-radio>
-              </el-radio-group>
-            </div>
-            <template v-if="getShowTableBox()">
-              <CommonTable v-if="getShowTableBox()" :data="getList" ref="CommonTable"
-                @addHandle="addHandle" type="1" :sourceData="sourceData"
-                :isPostPosition="dataForm.isPostPosition" :sourceOptions="sourceOptions"
-                :parameterJson="parameterJson" @removeCommonTable="removeCommonTable"
-                style="width: 100%;" />
-            </template>
-            <p v-show="activeKey == 2 && apiData.bodyType == 0" class="body_txt">
-              该请求没有Body主体</p>
-            <div class="json-block"
-              v-if="activeKey == 2 && (apiData.bodyType == 3 || apiData.bodyType == 4)">
-              <div class="json-block-inner">
-                <div class="inner-hd" v-if="!dataForm.isPostPosition">
-                  <p>{{ jsonTxt }}</p>
-                  <el-popover placement="bottom" width="260" trigger="hover">
-                    <span slot="reference" class="el-dropdown-link cursor_pointer">
-                      插入参数<i class="el-icon-arrow-down el-icon--right"></i>
-                    </span>
-                    <div>
-                      <el-input placeholder="输入关键字" v-model="filterText"
-                        suffix-icon="el-icon-search" clearable class="input-with-select"
-                        style="margin-bottom: 10px;">
-                      </el-input>
-                      <div style="overflow-y: scroll;max-height: 300px;">
-                        <el-tree :data="getTreeData" :props="props" :expand-on-click-node="true"
-                          :default-expand-all="true" :filter-node-method="filterNode"
-                          @node-click="bodyTreeNodeClick" ref="bodyTree">
-                          <span class="custom-tree-node" slot-scope="{ node, data }">
-                            <i :class="data.icon"></i>
-                            <span class="text">{{node.label}}</span>
-                          </span>
-                        </el-tree>
-                      </div>
-                    </div>
-                  </el-popover>
-                </div>
-                <JSONEditor v-if="apiData.bodyType == 3" v-model="apiData.bodyJson"
-                  :options="jsonOptions" ref="JSONEditorRef" class="JSONEditor" />
-                <JSONEditor v-if="apiData.bodyType == 4" v-model="apiData.bodyXml"
-                  :options="jsonOptions" ref="JSONEditorRef" class="JSONEditor" :key="key2" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="right-pane" v-if="!dataForm.isPostPosition">
-        <div class="right-pane-list">
-          <div class="cap">
-            <span>接口参数
-              <el-tooltip content="接收方式:Body/json" placement="top">
-                <a class="el-icon-question tooltip-question"></a>
-              </el-tooltip>
-            </span>
-          </div>
-          <RightTable :data="parameterJson" ref="RightTable" tableType="1"
-            @addOrUpdateHandle="addOrUpdateHandle($event,'1')"
-            @removeParameter="removeParameter($event,'1')" @handleItemClick="handleItemClick" />
-        </div>
-        <div class="right-pane-list">
-          <div class="cap">
-            <span>字段列表
-              <el-tooltip content="接收方式:Body/json" placement="top">
-                <a class="el-icon-question tooltip-question"></a>
-              </el-tooltip>
-            </span>
-          </div>
-          <RightTable :data="fieldJson" ref="RightTable" tableType="2"
-            @addOrUpdateHandle="addOrUpdateHandle($event,'2')"
-            @removeParameter="removeParameter($event,'2')" />
-        </div>
-      </div>
-    </div>
-    <!-- api\sql数据处理 -->
+<!--     api操作-->
+<!--    <div class="config" v-if="getShowApiBox()">-->
+<!--      <div class="detail api_detail">-->
+<!--        <div class="middle-pane">-->
+<!--          <div class="right-pane-list">-->
+<!--            <div class="requestMethod">-->
+<!--              <el-form ref="dataForm" :model="apiData" :rules="dataRule">-->
+<!--                <el-form-item prop="url" label="">-->
+<!--                  <el-input placeholder="请输入接口地址" v-model="apiData.url">-->
+<!--                    <el-select v-model="apiData.method" slot="prepend" placeholder="请选择">-->
+<!--                      <el-option label="GET" :value="1"></el-option>-->
+<!--                      <el-option label="POST" :value="2"></el-option>-->
+<!--                    </el-select>-->
+<!--                  </el-input>-->
+<!--                </el-form-item>-->
+<!--              </el-form>-->
+<!--            </div>-->
+<!--            <p class="textBlock">请求参数</p>-->
+<!--            <div class="tabsBlock">-->
+<!--              <el-tabs v-model="activeKey" @tab-click="tabsHandleClick">-->
+<!--                <el-tab-pane label="Header" name="0"></el-tab-pane>-->
+<!--                <el-tab-pane label="Query" name="1"></el-tab-pane>-->
+<!--                <el-tab-pane label="Body" name="2"></el-tab-pane>-->
+<!--              </el-tabs>-->
+<!--            </div>-->
+<!--            <div class="radio-group-block" v-if="activeKey == 2">-->
+<!--              <el-radio-group v-model="apiData.bodyType" @change="onBtnTypeChange" :key="key2">-->
+<!--                <el-radio :label="0">none</el-radio>-->
+<!--                <el-radio :label="1">form-data</el-radio>-->
+<!--                <el-radio :label="2">x-www-form-urlencoded</el-radio>-->
+<!--                <el-radio :label="3">json</el-radio>-->
+<!--                <el-radio :label="4">xml</el-radio>-->
+<!--              </el-radio-group>-->
+<!--            </div>-->
+<!--            <template v-if="getShowTableBox()">-->
+<!--              <CommonTable v-if="getShowTableBox()" :data="getList" ref="CommonTable"-->
+<!--                @addHandle="addHandle" type="1" :sourceData="sourceData"-->
+<!--                :isPostPosition="dataForm.isPostPosition" :sourceOptions="sourceOptions"-->
+<!--                :parameterJson="parameterJson" @removeCommonTable="removeCommonTable"-->
+<!--                style="width: 100%;" />-->
+<!--            </template>-->
+<!--            <p v-show="activeKey == 2 && apiData.bodyType == 0" class="body_txt">-->
+<!--              该请求没有Body主体</p>-->
+<!--            <div class="json-block"-->
+<!--              v-if="activeKey == 2 && (apiData.bodyType == 3 || apiData.bodyType == 4)">-->
+<!--              <div class="json-block-inner">-->
+<!--                <div class="inner-hd" v-if="!dataForm.isPostPosition">-->
+<!--                  <p>{{ jsonTxt }}</p>-->
+<!--                  <el-popover placement="bottom" width="260" trigger="hover">-->
+<!--                    <span slot="reference" class="el-dropdown-link cursor_pointer">-->
+<!--                      插入参数<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+<!--                    </span>-->
+<!--                    <div>-->
+<!--                      <el-input placeholder="输入关键字" v-model="filterText"-->
+<!--                        suffix-icon="el-icon-search" clearable class="input-with-select"-->
+<!--                        style="margin-bottom: 10px;">-->
+<!--                      </el-input>-->
+<!--&lt;!&ndash;                      <div style="overflow-y: scroll;max-height: 300px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <el-tree :data="getTreeData" :props="props" :expand-on-click-node="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                          :default-expand-all="true" :filter-node-method="filterNode"&ndash;&gt;-->
+<!--&lt;!&ndash;                          @node-click="bodyTreeNodeClick" ref="bodyTree">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <span class="custom-tree-node" slot-scope="{ node, data }">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <i :class="data.icon"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <span class="text">{{node.label}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                          </span>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </el-tree>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </div>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                  </el-popover>-->
+<!--                </div>-->
+<!--                <JSONEditor v-if="apiData.bodyType == 3" v-model="apiData.bodyJson"-->
+<!--                  :options="jsonOptions" ref="JSONEditorRef" class="JSONEditor" />-->
+<!--                <JSONEditor v-if="apiData.bodyType == 4" v-model="apiData.bodyXml"-->
+<!--                  :options="jsonOptions" ref="JSONEditorRef" class="JSONEditor" :key="key2" />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="right-pane" v-if="!dataForm.isPostPosition">-->
+<!--        <div class="right-pane-list">-->
+<!--          <div class="cap">-->
+<!--            <span>接口参数-->
+<!--              <el-tooltip content="接收方式:Body/json" placement="top">-->
+<!--                <a class="el-icon-question tooltip-question"></a>-->
+<!--              </el-tooltip>-->
+<!--            </span>-->
+<!--          </div>-->
+<!--          <RightTable :data="parameterJson" ref="RightTable" tableType="1"-->
+<!--            @addOrUpdateHandle="addOrUpdateHandle($event,'1')"-->
+<!--            @removeParameter="removeParameter($event,'1')" @handleItemClick="handleItemClick" />-->
+<!--        </div>-->
+<!--        <div class="right-pane-list">-->
+<!--          <div class="cap">-->
+<!--            <span>字段列表-->
+<!--              <el-tooltip content="接收方式:Body/json" placement="top">-->
+<!--                <a class="el-icon-question tooltip-question"></a>-->
+<!--              </el-tooltip>-->
+<!--            </span>-->
+<!--          </div>-->
+<!--          <RightTable :data="fieldJson" ref="RightTable" tableType="2"-->
+<!--            @addOrUpdateHandle="addOrUpdateHandle($event,'2')"-->
+<!--            @removeParameter="removeParameter($event,'2')" />-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+     api\sql数据处理
     <div class="jsStaticData" v-if="getShowCodeBox()">
       <div class="json-box">
         <JNPFCodeEditor v-model="dataJsJson" :options="jsOptions" ref="CodeEditor"
@@ -337,7 +338,7 @@
   </div>
 </template>
 <script>
-import { getDataInterfaceInfo, createDataInterface, updateDataInterface, getSelector } from '@/api/systemData/dataInterface'
+import { getDataInterfaceInfo, updateDataInterface, getSelector } from '@/api/systemData/dataInterface'
 import { getDataSourceListAll } from '@/api/systemData/dataSource'
 import { DataModelListAll, DataModelFieldList } from '@/api/systemData/dataModel'
 import SQLEditor from '@/components/JNPFEditor/monaco'
@@ -349,6 +350,8 @@ import CommonTable from './components/CommonTable'
 import { deepClone } from '@/utils'
 import RightTable from './components/RightTable'
 import JNPFCodeEditor from '@/components/JNPFEditor/monaco'
+import {createDIF , getDIFInfo} from "@/api/portal";
+
 const defaultDataJsJson = '(data) => {\r\n    // 处理数据逻辑\r\n\r\n    // 返回所需的数据\r\n    return data\r\n}';
 const defaultDataExceptionJson = '(data) => {\r\n    // 返回true表示接口验证成功！\r\n\r\n    // 返回flase表示接口验证失败！\r\n    return data\r\n}';
 const defaultJson = {
@@ -443,35 +446,35 @@ export default {
       filterText: ''
     }
   },
-  watch: {
-    filterText(val) {
-      this.$nextTick(() => {
-        this.$refs.bodyTree.filter(val)
-      })
-    },
-    active: {
-      handler(newVal, oldVal) {
-        if (this.dataForm.type !== 3) return;
-        if (oldVal == 1) this.dataConfigJson.apiData = JSON.parse(JSON.stringify(this.apiData));
-        if (oldVal == 2 && this.dataForm.hasPage) this.dataEchoJson.apiData = JSON.parse(JSON.stringify(this.apiData));
-        if (newVal === 1) {
-          this.apiData = JSON.parse(JSON.stringify(this.dataConfigJson.apiData));
-          if (this.apiData.bodyType != 3 && this.apiData.bodyType != 4) {
-            this.$set(this.apiData, 'body', JSON.parse(this.apiData.body))
-          } else {
-            if (this.apiData.bodyType == 3) {
-              this.$set(this.apiData, 'bodyJson', this.dataConfigJson.apiData.body)
-            } else {
-              this.$set(this.apiData, 'bodyXml', this.dataEchoJson.apiData.body)
-            }
-            this.$set(this.apiData, 'body', [])
-          }
-        }
-        if (newVal === 2 && this.dataForm.hasPage) this.apiData = JSON.parse(JSON.stringify(this.dataEchoJson.apiData));
-      },
-      deep: true
-    }
-  },
+  // watch: {
+    // filterText(val) {
+    //   this.$nextTick(() => {
+    //     this.$refs.bodyTree.filter(val)
+    //   })
+    // },
+    // active: {
+    //   handler(newVal, oldVal) {
+    //     if (this.dataForm.type !== 3) return;
+    //     if (oldVal == 1) this.dataConfigJson.apiData = JSON.parse(JSON.stringify(this.apiData));
+    //     if (oldVal == 2 && this.dataForm.hasPage) this.dataEchoJson.apiData = JSON.parse(JSON.stringify(this.apiData));
+    //     if (newVal === 1) {
+    //       this.apiData = JSON.parse(JSON.stringify(this.dataConfigJson.apiData));
+    //       if (this.apiData.bodyType != 3 && this.apiData.bodyType != 4) {
+    //         this.$set(this.apiData, 'body', JSON.parse(this.apiData.body))
+    //       } else {
+    //         if (this.apiData.bodyType == 3) {
+    //           this.$set(this.apiData, 'bodyJson', this.dataConfigJson.apiData.body)
+    //         } else {
+    //           this.$set(this.apiData, 'bodyXml', this.dataEchoJson.apiData.body)
+    //         }
+    //         this.$set(this.apiData, 'body', [])
+    //       }
+    //     }
+    //     if (newVal === 2 && this.dataForm.hasPage) this.apiData = JSON.parse(JSON.stringify(this.dataEchoJson.apiData));
+    //   },
+    //   deep: true
+    // }
+  // },
   computed: {
     getList() {
       if (this.activeKey === '0') this.list = this.apiData.header || [];
@@ -479,17 +482,17 @@ export default {
       if (this.activeKey === '2') this.list = this.apiData.body || [];
       return this.list;
     },
-    hasPageDisabled() {
-      if (this.dataForm.id && this.dataForm.isPostPosition == 1) return true
-      if (this.dataForm.id && this.defHasPage == 1) return true
-    },
+    // hasPageDisabled() {
+    //   if (this.dataForm.id && this.dataForm.isPostPosition == 1) return true
+    //   if (this.dataForm.id && this.defHasPage == 1) return true
+    // },
     jsonTxt() {
       return this.apiData.bodyType == 3 ? 'JSON Body' : 'XML Body'
     },
-    sourceOptions() {
-      if (this.dataForm.hasPage) return [{ label: '接口参数', value: 1 }, { label: '分页参数', value: 4 }, { label: '变量', value: 2 }, { label: '自定义', value: 3 }]
-      return [{ label: '接口参数', value: 1 }, { label: '变量', value: 2 }, { label: '自定义', value: 3 }]
-    },
+    // sourceOptions() {
+    //   if (this.dataForm.hasPage) return [{ label: '接口参数', value: 1 }, { label: '分页参数', value: 4 }, { label: '变量', value: 2 }, { label: '自定义', value: 3 }]
+    //   return [{ label: '接口参数', value: 1 }, { label: '变量', value: 2 }, { label: '自定义', value: 3 }]
+    // },
     stepList() {
       this.key = +new Date()
       let base = ['基本信息', '数据配置'];
@@ -500,68 +503,68 @@ export default {
       if (this.dataForm.type === 3 && this.dataForm.isPostPosition === 1) return base;
       return [...base, '数据处理'];
     },
-    sysVariableList() {
-      const list = [
-        { value: '@snowFlakeID', tips: "系统生成雪花ID" },
-        { value: '@currentUser', tips: "当前用户" },
-        { value: '@currentUsersAndSubordinates', tips: "当前用户及下属" },
-        { value: '@organization', tips: "当前组织" },
-        { value: '@currentOrganizationAndSuborganization', tips: "当前组织及子组织" },
-        { value: '@chargeorganization', tips: "当前分管组织" }
-      ]
-      const dataConfigList = [
-        { value: '@offsetSize', tips: "开始数据条数" },
-        { value: '@pageSize', tips: "返回数据条数" },
-      ]
-      const dataEchoList = [
-        { value: '@showKey', tips: "回显字段查询key" },
-        { value: '@showValue', tips: "回显字段值" },
-      ]
-      const keyword = { value: '@keyword', tips: "关键词搜索" }
-      if (!this.dataForm.hasPage) return list
-      if (this.active === 2) return [...list, keyword]
-      if (this.active === 3) return [...list, ...dataEchoList]
-      return [...list, ...dataConfigList, keyword]
-    },
-    getTreeData() {
-      const parameterJson = this.parameterJson.map(o => ({ ...o, fullName: o.field, parameter: 1, type: 1 }));
-      let tree = [
-        { id: 1, fullName: '接口参数', hasChildren: true, children: parameterJson },
-        { id: 2, fullName: '变量', hasChildren: true, children: this.sourceData },
-      ];
-      tree = tree.filter(o => o.children && o.children.length);
-      if (!this.dataForm.hasPage) return tree;
-      const page = {
-        id: 3,
-        fullName: '分页参数',
-        hasChildren: true,
-        children: [
-          { fullName: 'currentPage', id: 'currentPage', parameter: 1, type: 1 },
-          { fullName: 'pageSize', id: 'pageSize', parameter: 1, type: 1 },
-          { fullName: 'keyword', id: 'keyword', parameter: 1, type: 1 },
-        ],
-      };
-      const echo = {
-        id: 2,
-        fullName: '回显参数',
-        hasChildren: true,
-        children: [
-          { fullName: 'showKey', id: 'showKey', parameter: 1, type: 1 },
-          { fullName: 'showValue', id: 'showValue', parameter: 1, type: 1 },
-        ],
-      };
-      return [...tree, this.active == 1 ? page : echo];
-    },
+    // sysVariableList() {
+    //   const list = [
+    //     { value: '@snowFlakeID', tips: "系统生成雪花ID" },
+    //     { value: '@currentUser', tips: "当前用户" },
+    //     { value: '@currentUsersAndSubordinates', tips: "当前用户及下属" },
+    //     { value: '@organization', tips: "当前组织" },
+    //     { value: '@currentOrganizationAndSuborganization', tips: "当前组织及子组织" },
+    //     { value: '@chargeorganization', tips: "当前分管组织" }
+    //   ]
+    //   const dataConfigList = [
+    //     { value: '@offsetSize', tips: "开始数据条数" },
+    //     { value: '@pageSize', tips: "返回数据条数" },
+    //   ]
+    //   const dataEchoList = [
+    //     { value: '@showKey', tips: "回显字段查询key" },
+    //     { value: '@showValue', tips: "回显字段值" },
+    //   ]
+    //   const keyword = { value: '@keyword', tips: "关键词搜索" }
+    //   if (!this.dataForm.hasPage) return list
+    //   if (this.active === 2) return [...list, keyword]
+    //   if (this.active === 3) return [...list, ...dataEchoList]
+    //   return [...list, ...dataConfigList, keyword]
+    // },
+    // getTreeData() {
+    //   const parameterJson = this.parameterJson.map(o => ({ ...o, fullName: o.field, parameter: 1, type: 1 }));
+    //   let tree = [
+    //     { id: 1, fullName: '接口参数', hasChildren: true, children: parameterJson },
+    //     { id: 2, fullName: '变量', hasChildren: true, children: this.sourceData },
+    //   ];
+    //   tree = tree.filter(o => o.children && o.children.length);
+    //   if (!this.dataForm.hasPage) return tree;
+    //   const page = {
+    //     id: 3,
+    //     fullName: '分页参数',
+    //     hasChildren: true,
+    //     children: [
+    //       { fullName: 'currentPage', id: 'currentPage', parameter: 1, type: 1 },
+    //       { fullName: 'pageSize', id: 'pageSize', parameter: 1, type: 1 },
+    //       { fullName: 'keyword', id: 'keyword', parameter: 1, type: 1 },
+    //     ],
+    //   };
+    //   const echo = {
+    //     id: 2,
+    //     fullName: '回显参数',
+    //     hasChildren: true,
+    //     children: [
+    //       { fullName: 'showKey', id: 'showKey', parameter: 1, type: 1 },
+    //       { fullName: 'showValue', id: 'showValue', parameter: 1, type: 1 },
+    //     ],
+    //   };
+    //   return [...tree, this.active == 1 ? page : echo];
+    // },
   },
   methods: {
-    onIsPostPositionChange(e) {
-      this.dataForm.isPostPosition = e;
-      if (this.dataForm.isPostPosition && this.dataForm.hasPage) this.dataForm.hasPage = 0
-    },
-    onHasPageChange(e) {
-      this.dataForm.hasPage = e;
-      if (this.dataForm.isPostPosition && this.dataForm.hasPage) this.dataForm.isPostPosition = 0
-    },
+    // onIsPostPositionChange(e) {
+    //   this.dataForm.isPostPosition = e;
+    //   if (this.dataForm.isPostPosition && this.dataForm.hasPage) this.dataForm.hasPage = 0
+    // },
+    // onHasPageChange(e) {
+    //   this.dataForm.hasPage = e;
+    //   if (this.dataForm.isPostPosition && this.dataForm.hasPage) this.dataForm.isPostPosition = 0
+    // },
     getShowApiBox() {
       if (this.active == 1 && this.dataForm.type == 3) return true;
       if (this.active == 2 && this.dataForm.type == 3 && this.dataForm.hasPage) return true;
@@ -578,10 +581,10 @@ export default {
     getIsLastStep() {
       return this.active === this.stepList.length - 1 && !(this.dataForm.type === 3 && this.dataForm.isPostPosition == 1) ? true : false;
     },
-    filterNode(value, data) {
-      if (!value) return true;
-      return data.fullName.indexOf(value) !== -1;
-    },
+    // filterNode(value, data) {
+    //   if (!value) return true;
+    //   return data.fullName.indexOf(value) !== -1;
+    // },
     init(id, category) {
       this.filterText = ''
       Object.assign(this.$data, this.$options.data())
@@ -591,13 +594,13 @@ export default {
       this.$nextTick(() => {
         this.$refs['dataForm'].resetFields()
         // 获取分类
-        this.$store.dispatch('base/getDictionaryData', { sort: 'DataInterfaceType' }).then((res) => {
-          this.selectData = res
-        })
+        // this.$store.dispatch('base/getDictionaryData', { sort: 'DataInterfaceType' }).then((res) => {
+        //   this.selectData = res
+        // })
         // 获取数据库
-        getDataSourceListAll().then(res => {
-          const list = res.data.list || []
-          this.dbOptions = list.filter(o => o.children && o.children.length)
+        // getDataSourceListAll().then(res => {
+        //   const list = res.data.list || []
+        //   this.dbOptions = list.filter(o => o.children && o.children.length)
           if (this.dataForm.id) {
             this.formLoading = false
             this.getFormData()
@@ -606,43 +609,44 @@ export default {
             this.formLoading = false
             this.getTableList()
           }
-          this.getSelector()
-        })
+          // this.getSelector()
+        // })
       })
     },
     getFormData() {
-      getDataInterfaceInfo(this.dataForm.id).then(res => {
-        this.dataForm = res.data;
+      getDIFInfo(this.dataForm.id).then(res => {
+        console.log(res.data.data)
+        this.dataForm = res.data.data;
         this.defHasPage = this.dataForm.hasPage
         if (!this.dataForm.action) this.dataForm.action = 3
-        this.dataConfigJson = res.data.dataConfigJson ? JSON.parse(res.data.dataConfigJson) : JSON.parse(JSON.stringify(defaultJson));
-        this.dataCountJson = res.data.dataCountJson ? JSON.parse(res.data.dataCountJson) : JSON.parse(JSON.stringify(defaultJson));
-        this.dataEchoJson = res.data.dataEchoJson ? JSON.parse(res.data.dataEchoJson) : JSON.parse(JSON.stringify(defaultJson));
-        this.parameterJson = res.data.parameterJson ? JSON.parse(res.data.parameterJson) : [];
-        this.fieldJson = res.data.fieldJson ? JSON.parse(res.data.fieldJson) : [];
-        this.dataJsJson = res.data.dataJsJson;
-        this.dataExceptionJson = res.data.dataExceptionJson;
+        this.dataConfigJson = res.data.data.dataConfigJson ? JSON.parse(res.data.data.dataConfigJson) : JSON.parse(JSON.stringify(defaultJson));
+        this.dataCountJson = res.data.data.dataCountJson ? JSON.parse(res.data.data.dataCountJson) : JSON.parse(JSON.stringify(defaultJson));
+        this.dataEchoJson = res.data.data.dataEchoJson ? JSON.parse(res.data.data.dataEchoJson) : JSON.parse(JSON.stringify(defaultJson));
+        this.parameterJson = res.data.data.parameterJson ? JSON.parse(res.data.data.parameterJson) : [];
+        this.fieldJson = res.data.data.fieldJson ? JSON.parse(res.data.data.fieldJson) : [];
+        this.dataJsJson = res.data.data.dataJsJson;
+        this.dataExceptionJson = res.data.data.dataExceptionJson;
         this.getTableList();
         this.formLoading = false
       })
     },
     getTableList() {
-      this.treeLoading = true
-      const query = {
-        linkId: this.dataConfigJson.sqlData.dbLinkId,
-        keyword: this.keyword,
-        pageSize: 1000000,
-      };
-      DataModelListAll(query).then(res => {
-        this.treeLoading = false;
-        this.treeData = res.data.list.map(o => ({
-          ...o,
-          fullName: o.tableName ? o.table + '(' + o.tableName + ')' : o.table,
-          isLeaf: false,
-          id: o.table,
-          icon: o.type == 1 ? 'icon-ym icon-ym-view' : 'icon-ym icon-ym-generator-tableGrid',
-        }));
-      })
+      // this.treeLoading = true
+      // const query = {
+      //   linkId: this.dataConfigJson.sqlData.dbLinkId,
+      //   keyword: this.keyword,
+      //   pageSize: 1000000,
+      // };
+      // DataModelListAll(query).then(res => {
+      //   this.treeLoading = false;
+      //   this.treeData = res.data.list.map(o => ({
+      //     ...o,
+      //     fullName: o.tableName ? o.table + '(' + o.tableName + ')' : o.table,
+      //     isLeaf: false,
+      //     id: o.table,
+      //     icon: o.type == 1 ? 'icon-ym icon-ym-view' : 'icon-ym icon-ym-generator-tableGrid',
+      //   }));
+      // })
     },
     handleApiData(apiData) {
       if (apiData.bodyXml) apiData.body = apiData.bodyXml;
@@ -669,10 +673,10 @@ export default {
         fieldJson: JSON.stringify(this.fieldJson),
         parameterJson: JSON.stringify(this.parameterJson),
       };
-      const formMethod = this.dataForm.id ? updateDataInterface : createDataInterface
+      const formMethod = this.dataForm.id ? createDIF : createDIF
       formMethod(query).then(res => {
         this.$message({
-          message: res.msg,
+          message: res.data.msg,
           type: 'success',
           duration: 1500,
           onClose: () => {
@@ -863,12 +867,12 @@ export default {
       }).catch(() => { });
     },
     /**右侧表格操作 end */
-    handleShowPageExplain() {
-      this.pageExplainVisible = true
-      this.$nextTick(() => {
-        this.$refs.pageExplain.init()
-      })
-    },
+    // handleShowPageExplain() {
+    //   this.pageExplainVisible = true
+    //   this.$nextTick(() => {
+    //     this.$refs.pageExplain.init()
+    //   })
+    // },
     getShowSqlBox() {
       if (this.dataForm.type !== 1) return false
       if (this.active === 1) return true

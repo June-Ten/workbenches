@@ -17,7 +17,8 @@
         </div>
       </div>
       <el-scrollbar class="layout-area" :class="{'ml-10':showType=='pc'}">
-        <div v-if="showType=='pc'">
+<!--        <div v-if="showType=='pc'">-->
+        <div>
           <grid-layout :layout.sync="layout" :row-height="40" v-if="layout.length">
             <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h"
               :i="item.i" :key="item.i" :maxH="item.maxH" :minH="item.minH" :minW="item.minW"
@@ -38,32 +39,32 @@
             <img src="@/assets/images/emptyPortal.png" class="empty-img">
           </div>
         </div>
-        <div id="ipad" v-else>
-          <div class="outeripad">
-            <div class="ipadbody">
-              <div class="ipad-name">当前展示pc设计内容，请前往APP查看效果</div>
-              <el-scrollbar class="center-scrollbar">
-                <draggable v-if="layout.length" class="drawing-board" :list="layout"
-                  :animation="340" group="componentsGroup">
-                  <div v-for="(item,index) in layout" :key="index" class="item-box"
-                    @click="handleClick(item)" :class="{'active-item': item.i===activeId}">
-                    <parser :item="item" :activeId="activeId" :showType='showType' />
-                    <div class="mask" v-if="!noNeedMaskList.includes(item.jnpfKey)"></div>
-                    <span title="复制" class="drawing-item-copy" @click="addComponent(item)">
-                      <i class="el-icon-copy-document"></i></span>
-                    <el-popconfirm title="确定删除该组件？" class="drawing-item-delete"
-                      @confirm="(event)=>{handleRemoveItem(item.i)}">
-                      <i slot="reference" class="el-icon-delete"></i>
-                    </el-popconfirm>
-                  </div>
-                </draggable>
-                <div v-show="!layout.length" class="empty-info app-empty-info">
-                  <img src="@/assets/images/emptyPortal.png" class="empty-img">
-                </div>
-              </el-scrollbar>
-            </div>
-          </div>
-        </div>
+<!--        <div id="ipad" v-else>-->
+<!--          <div class="outeripad">-->
+<!--            <div class="ipadbody">-->
+<!--              <div class="ipad-name">当前展示pc设计内容，请前往APP查看效果</div>-->
+<!--              <el-scrollbar class="center-scrollbar">-->
+<!--                <draggable v-if="layout.length" class="drawing-board" :list="layout"-->
+<!--                  :animation="340" group="componentsGroup">-->
+<!--                  <div v-for="(item,index) in layout" :key="index" class="item-box"-->
+<!--                    @click="handleClick(item)" :class="{'active-item': item.i===activeId}">-->
+<!--                    <parser :item="item" :activeId="activeId" :showType='showType' />-->
+<!--                    <div class="mask" v-if="!noNeedMaskList.includes(item.jnpfKey)"></div>-->
+<!--                    <span title="复制" class="drawing-item-copy" @click="addComponent(item)">-->
+<!--                      <i class="el-icon-copy-document"></i></span>-->
+<!--                    <el-popconfirm title="确定删除该组件？" class="drawing-item-delete"-->
+<!--                      @confirm="(event)=>{handleRemoveItem(item.i)}">-->
+<!--                      <i slot="reference" class="el-icon-delete"></i>-->
+<!--                    </el-popconfirm>-->
+<!--                  </div>-->
+<!--                </draggable>-->
+<!--                <div v-show="!layout.length" class="empty-info app-empty-info">-->
+<!--                  <img src="@/assets/images/emptyPortal.png" class="empty-img">-->
+<!--                </div>-->
+<!--              </el-scrollbar>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
       </el-scrollbar>
     </el-main>
     <right-panel :active-data="activeData" :refresh="refresh" :showType="showType" />
@@ -183,6 +184,7 @@ export default {
     addLocalRecord(val) {
       if (JSON.stringify(val) != this.copyDrawingList) {
         this.copyDrawingList = JSON.stringify(val);
+        console.log('---'+this.copyDrawingList)
         this.$emit('addRecord', val)
       }
     },
@@ -291,6 +293,7 @@ export default {
     addComponent(item, type, currentItem, index) {
       let clone = deepClone(item)
       let x = 0, y = 0, i = this.config.layoutId
+      console.log(this.config.layoutId)
       if (this.layout.length) {
         let maxYItem = { y: 0, h: 0 };
         for (let i = 0; i < this.layout.length; i++) {
@@ -318,7 +321,7 @@ export default {
     },
     getDefaultValue(row) {
       const jnpfKey = row.jnpfKey
-      if (jnpfKey == 'text') return "JNPF快速开发平台"
+      if (jnpfKey == 'text') return "开发平台"
       if (jnpfKey == 'image') return "https://app.cdn.jnpfsoft.com/image/3.2/banner1.png"
       if (jnpfKey == 'video') return "https://cdn.jnpfsoft.com/2022/video/index_video.mp4"
       if (jnpfKey == 'barChart' || jnpfKey == 'lineChart' || jnpfKey == 'pieChart') return chartData.baseBarData

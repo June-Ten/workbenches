@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { getDataInterfaceParam, getDataInterfaceRes } from '@/api/systemData/dataInterface'
+import {getDIFP} from "@/api/portal";
 
 export default {
   data() {
@@ -56,10 +56,11 @@ export default {
       this.testLoading = true
       let query = {
         paramList: this.inputList,
-        tenantId: this.tenantId,
+        // tenantId: this.tenantId,
         origin: 'preview'
       }
-      getDataInterfaceRes(this.id, query).then(res => {
+      getDIFP(this.id, query).then(res => {
+        alert(2)
         this.testLoading = false
         let data = res
         this.responseData = JSON.stringify(data, null, 4)
@@ -77,9 +78,9 @@ export default {
       this.formLoading = true
       this.responseData = ''
       this.$nextTick(() => {
-        const prefix = this.define.comUrl === '/dev' ? window.location.origin : ''
-        this.url = `${prefix}${this.define.comUrl}/api/system/DataInterface/${id}/Actions/Preview` + (tenantId ? '?tenantId=' + tenantId : '')
-        getDataInterfaceParam(this.id).then(res => {
+        const prefix = 'https://test.jinzhiyuns.com';
+        this.url = `${prefix}/Restful/JinQue.BMDynamicTable.Entities.Sys_Portal_Data_Interface/GetInfoToSQL.json?id=${id}`
+        getDIFP(this.id).then(res => {
           this.inputList = res.data
           this.formLoading = false
         }).catch(() => {

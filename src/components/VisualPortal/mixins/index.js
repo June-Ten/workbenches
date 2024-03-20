@@ -35,6 +35,7 @@ export default {
     } else {
       setTimeout(() => {
         this.chartData = this.option.defaultValue
+        console.log('666'+this.chartData)
         this.initChart()
       }, 0);
     }
@@ -354,7 +355,6 @@ export default {
         }
       }
       this.currOption = option
-      console.log(option)
     },
     initChart() {
       this.initChartData()

@@ -107,6 +107,7 @@
 <script>
 import Sortable from 'sortablejs'
 import { getDataInterfaceInfo } from '@/api/systemData/dataInterface';
+import {getDIFP} from "@/api/portal";
 export default {
   props: ['showType'],
   components: {},
@@ -192,8 +193,8 @@ export default {
     },
     initFieldData() {
       if (!this.interfaceId) return (this.allOptions = []);
-      getDataInterfaceInfo(this.interfaceId).then(res => {
-        const data = res.data;
+      getDIFP(this.interfaceId).then(res => {
+        const data = res.data.data;
         this.allOptions = data.fieldJson ? JSON.parse(data.fieldJson) : [];
       });
     },

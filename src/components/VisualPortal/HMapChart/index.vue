@@ -129,7 +129,7 @@ export default {
         })
       })
     })
-    this.getAtlasList()
+    // this.getAtlasList()
   },
   methods: {
     initMap() {
@@ -140,52 +140,52 @@ export default {
       this.chart = echarts.init(this.$refs.chart)
       this.chart.showLoading();
       this.currMapCode = code
-      getMapData(code).then(res => {
-        this.chart.hideLoading();
-        this.geoJson = res.data
-        this.code = code
-        this.initCurrOption()
-        echarts.registerMap(code, this.geoJson);
-        this.chart.setOption(this.currOption, true)
-        this.setScatterMapChart()
-        this.setBarMapChart()
-        if (this.option.autoCarousel) this.handleDispatchAction()
-        this.clearHashMap()
-        this.chart.on('click', (param) => {
-          if (!this.option.drillDown) return
-          if (!this.allAtlasList.length) return
-          const item = this.allAtlasList.find((i) => i.fullName === param.name)
-          if (item) {
-            if (this.currMapCode == item.id) return
-            this.currMapCode = item.id
-            getMapData(item.id).then(res => {
-              this.code = item.enCode
-              this.initCurrOption()
-              echarts.registerMap(item.enCode, res.data);
-              this.chart.setOption(this.currOption, true)
-              this.setScatterMapChart()
-              this.setBarMapChart()
-              this.zoom += 1
-              this.setHashMap(param.name, item.id, res.data)
-            })
-          }
-        });
-        this.chart.on('mouseover', (params) => {
-          if (!this.option.autoCarousel) return
-          clearInterval(this.timeTicket);
-          this.chart.dispatchAction({
-            type: 'showTip',
-            seriesIndex: 0,
-            dataIndex: params.dataIndex,
-          });
-        });
-        this.chart.on('mouseout', () => {
-          if (this.option.autoCarousel) this.handleDispatchAction()
-        });
-        this.chart.on('georoam', () => {
-          this.updateBarChart()
-        });
-      })
+      // getMapData(code).then(res => {
+      //   this.chart.hideLoading();
+      //   this.geoJson = res.data
+      //   this.code = code
+      //   this.initCurrOption()
+      //   echarts.registerMap(code, this.geoJson);
+      //   this.chart.setOption(this.currOption, true)
+      //   this.setScatterMapChart()
+      //   this.setBarMapChart()
+      //   if (this.option.autoCarousel) this.handleDispatchAction()
+      //   this.clearHashMap()
+      //   this.chart.on('click', (param) => {
+      //     if (!this.option.drillDown) return
+      //     if (!this.allAtlasList.length) return
+      //     const item = this.allAtlasList.find((i) => i.fullName === param.name)
+      //     if (item) {
+      //       if (this.currMapCode == item.id) return
+      //       this.currMapCode = item.id
+      //       getMapData(item.id).then(res => {
+      //         this.code = item.enCode
+      //         this.initCurrOption()
+      //         echarts.registerMap(item.enCode, res.data);
+      //         this.chart.setOption(this.currOption, true)
+      //         this.setScatterMapChart()
+      //         this.setBarMapChart()
+      //         this.zoom += 1
+      //         this.setHashMap(param.name, item.id, res.data)
+      //       })
+      //     }
+      //   });
+      //   this.chart.on('mouseover', (params) => {
+      //     if (!this.option.autoCarousel) return
+      //     clearInterval(this.timeTicket);
+      //     this.chart.dispatchAction({
+      //       type: 'showTip',
+      //       seriesIndex: 0,
+      //       dataIndex: params.dataIndex,
+      //     });
+      //   });
+      //   this.chart.on('mouseout', () => {
+      //     if (this.option.autoCarousel) this.handleDispatchAction()
+      //   });
+      //   this.chart.on('georoam', () => {
+      //     this.updateBarChart()
+      //   });
+      // })
     },
     resetChart() {
       if (!this.geoJson) return
@@ -542,21 +542,21 @@ export default {
         this.count += 1;
       }, this.option.autoCarouselTime || 3000);
     },
-    getAtlasList() {
-      this.allAtlasList = []
-      getAtlas().then(res => {
-        const loop = (data) => {
-          if (Array.isArray(data)) {
-            for (let i = 0; i < data.length; i++) {
-              const ele = data[i];
-              this.allAtlasList.push(ele)
-              if (ele.children && ele.children.length) loop(ele.children)
-            }
-          }
-        }
-        loop(res.data)
-      })
-    }
+    // getAtlasList() {
+    //   this.allAtlasList = []
+    //   getAtlas().then(res => {
+    //     const loop = (data) => {
+    //       if (Array.isArray(data)) {
+    //         for (let i = 0; i < data.length; i++) {
+    //           const ele = data[i];
+    //           this.allAtlasList.push(ele)
+    //           if (ele.children && ele.children.length) loop(ele.children)
+    //         }
+    //       }
+    //     }
+    //     loop(res.data)
+    //   })
+    // }
   }
 }
 </script>
