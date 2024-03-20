@@ -69,7 +69,6 @@ export default {
   },
   methods: {
     init(data) {
-      alert(123)
       this.list = JSON.parse(JSON.stringify(data))
       // this.getDictionaryData()
       this.visible = true

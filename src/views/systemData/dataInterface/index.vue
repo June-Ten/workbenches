@@ -20,25 +20,25 @@
     <!--      </el-scrollbar>-->
     <!--    </div>-->
     <div class="JNPF-common-layout-center">
-      <el-row class="JNPF-common-search-box" :gutter="16">
-        <el-form @submit.native.prevent>
-          <el-col :span="6">
-            <el-form-item label="关键词">
-              <el-input v-model="listQuery.keyword" placeholder="请输入关键词查询" clearable
-                        @keyup.enter.native="search()"/>
-            </el-form-item>
-          </el-col>
-          <el-col :span="6">
-            <el-form-item>
-              <el-button type="primary" icon="el-icon-search" @click="search()">
-                {{ $t('common.search') }}
-              </el-button>
-              <el-button icon="el-icon-refresh-right" @click="reset()">{{ $t('common.reset') }}
-              </el-button>
-            </el-form-item>
-          </el-col>
-        </el-form>
-      </el-row>
+<!--      <el-row class="JNPF-common-search-box" :gutter="16">-->
+<!--        <el-form @submit.native.prevent>-->
+<!--          <el-col :span="6">-->
+<!--            <el-form-item label="关键词">-->
+<!--              <el-input v-model="listQuery.keyword" placeholder="请输入关键词查询" clearable-->
+<!--                        @keyup.enter.native="search()"/>-->
+<!--            </el-form-item>-->
+<!--          </el-col>-->
+<!--          <el-col :span="6">-->
+<!--            <el-form-item>-->
+<!--              <el-button type="primary" icon="el-icon-search" @click="search()">-->
+<!--                {{ $t('common.search') }}-->
+<!--              </el-button>-->
+<!--              <el-button icon="el-icon-refresh-right" @click="reset()">{{ $t('common.reset') }}-->
+<!--              </el-button>-->
+<!--            </el-form-item>-->
+<!--          </el-col>-->
+<!--        </el-form>-->
+<!--      </el-row>-->
       <div class="JNPF-common-layout-main JNPF-flex-main">
         <div class="JNPF-common-head">
           <topOpts @add="addOrUpdateHandle()">
@@ -81,11 +81,11 @@
                   </span>
                   <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item @click.native="handlePreview(scope.row)">预览</el-dropdown-item>
-                    <el-dropdown-item @click.native="handleCopy(scope.row.id)">复制</el-dropdown-item>
-                    <el-dropdown-item @click.native="exportData(scope.row.id)">导出</el-dropdown-item>
-                    <el-dropdown-item @click.native="variableData(scope.row.id)"
-                                      v-if="scope.row.isPostPosition == 1">变量
-                    </el-dropdown-item>
+<!--                    <el-dropdown-item @click.native="handleCopy(scope.row.id)">复制</el-dropdown-item>-->
+<!--                    <el-dropdown-item @click.native="exportData(scope.row.id)">导出</el-dropdown-item>-->
+<!--                    <el-dropdown-item @click.native="variableData(scope.row.id)"-->
+<!--                                      v-if="scope.row.isPostPosition == 1">变量-->
+<!--                    </el-dropdown-item>-->
                   </el-dropdown-menu>
                 </el-dropdown>
               </tableOpts>

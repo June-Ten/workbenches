@@ -87,7 +87,6 @@ export default {
   },
   methods: {
     init(id, type, groupId) {
-      alert(1)
       this.type = type
       this.dataForm.id = id || 0
       this.checked = 1

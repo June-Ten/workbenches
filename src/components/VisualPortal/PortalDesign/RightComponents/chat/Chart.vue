@@ -726,7 +726,6 @@ export default {
       this.renderKeyChange()
     },
     propsApiChange(val, item) {
-      alert(333)
       if (val) {
         this.activeData.propsApi = val
         this.activeData.propsName = item.fullName

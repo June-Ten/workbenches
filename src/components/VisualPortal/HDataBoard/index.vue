@@ -62,7 +62,6 @@ export default {
   },
   methods: {
     initData() {
-      alert(999)
       let list = JSON.parse(JSON.stringify(this.option.defaultValue)) || []
       if (this.activeData.dataType == 'dynamic') {
         for (let i = 0; i < list.length; i++) {
