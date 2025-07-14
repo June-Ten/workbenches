@@ -87,7 +87,7 @@ window.$website = {
         name: "柱状图",
         title: "柱状图",
         icon: 'icon-bar',
-        img: './img/assets/bar.png',
+        img: '../img/assets/bar.png',
         data: {
           categories: [
             "苹果",
