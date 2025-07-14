@@ -1,14 +1,12 @@
 <template>
   <div class="tableContainer">
-    <el-table v-if="!refreshTable" :data="data" ref="JNPFTable" class="JNPF-common-table"
-      :height="height" :element-loading-text="$t('common.loadingText')" v-bind="$attrs"
-      v-on="$listeners" :border="border" >
-<!--      @selection-change="handleSelectionChange" @current-change="currentChange"-->
-      <el-table-column prop="selection" type="selection" width="50" v-if="hasC" align="center"
-        />
-<!--      :selectable="checkSelectable" -->
-      <el-table-column prop="index" type="index" width="50" label="序号" v-if="hasNO"
-        :fixed="hasNOFixed" align="center" />
+    <el-table v-if="!refreshTable" :data="data" ref="JNPFTable" class="JNPF-common-table" :height="height"
+      :element-loading-text="$t('common.loadingText')" v-bind="$attrs" v-on="$listeners" :border="border">
+      <!--      @selection-change="handleSelectionChange" @current-change="currentChange"-->
+      <el-table-column prop="selection" type="selection" width="50" v-if="hasC" align="center" />
+      <!--      :selectable="checkSelectable" -->
+      <el-table-column prop="index" type="index" width="50" label="序号" v-if="hasNO" :fixed="hasNOFixed"
+        align="center" />
       <jnpf-table-column :columns="columns" :columnList="columnList" v-if="customColumn" />
       <template v-else>
         <slot />
@@ -16,8 +14,7 @@
       <el-table-column align="center" fixed="right" width="40" v-if="customColumn">
         <template slot="header">
           <el-tooltip content="表头设置" placement="top">
-            <el-link icon="icon-ym icon-ym-shezhi JNPF-common-head-icon" :underline="false"
-              @click="showDrawer" />
+            <el-link icon="icon-ym icon-ym-shezhi JNPF-common-head-icon" :underline="false" @click="showDrawer" />
           </el-tooltip>
         </template>
       </el-table-column>
@@ -25,8 +22,8 @@
         <el-empty description="暂无数据" :image-size="120"></el-empty>
       </template>
     </el-table>
-    <ColumnSettings v-if="drawerVisible" ref="columnSettings" :defaultColumns="defaultColumns"
-      :columnList="columnList" @setColumn="setColumn" />
+    <ColumnSettings v-if="drawerVisible" ref="columnSettings" :defaultColumns="defaultColumns" :columnList="columnList"
+      @setColumn="setColumn" />
   </div>
 </template>
 
@@ -168,9 +165,9 @@ export default {
       this.$forceUpdate()
       this.refreshTable = true
     },
-    checkSelectable(row,rowIndex) {
+    checkSelectable(row, rowIndex) {
       console.log(row)
-      if(rowIndex<0) return false
+      if (rowIndex < 0) return false
       if (row.top) return false
       return true
     },
@@ -189,7 +186,7 @@ export default {
       }
       // this.selectObj 就是选中的对象数据
       this.selectObj = val[val.length - 1];
-      if(!this.selectObj) {
+      if (!this.selectObj) {
         this.selectObj = {}
       }
     },

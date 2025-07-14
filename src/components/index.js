@@ -2,9 +2,9 @@
  * 自定义组件参考文档
  * https://cn.vuejs.org/v2/guide/components-registration.html
 */
-import { website } from '@/config.js'
-import $Echart from '../echart/common';
-import { KEY_COMPONENT_NAME } from '../echart/variable';
+// import { website } from '@/config.js'
+// import $Echart from '../echart/common';
+// import { KEY_COMPONENT_NAME } from '../echart/variable';
 
 import topOperation from '@/components/JNPF-topOperation/index'
 import tableOperation from '@/components/JNPF-tableOperation'

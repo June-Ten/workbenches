@@ -245,3 +245,10 @@ body::-webkit-scrollbar,
 #nprogress .bar {
   background: #1890ff !important;
 }
+
+.tableList.el-table {
+  background-color: transparent !important;
+}
+.tableList.el-table tr {
+  background-color: transparent !important;
+}

@@ -1,7 +1,6 @@
 const port='8080'
 module.exports = {
-    // publicPath: process.env.NODE_ENV === 'development' ? '/' : './',
-  publicPath: '/',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : './',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: false,

@@ -48,12 +48,14 @@ export default {
     previewPc() {
       this.closeDialog()
       if (this.type === 'flow' || this.type === 'report' || this.type === 'portal') {
+        
         setTimeout(() => {
           this.$emit('previewPc')
         }, 300)
       }
       if (this.type === 'webDesign') {
         if (!this.id) return
+        
         this.$router.push(`/previewModel?isPreview=1&id=${this.id}&previewType=${this.previewType}`)
       }
     },

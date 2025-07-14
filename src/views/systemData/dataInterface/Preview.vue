@@ -1,10 +1,8 @@
 <template>
   <div class="JNPF-preview-main">
     <div class="JNPF-common-page-header">
-      <el-page-header @back="goBack" :content="'接口预览 - '+title" />
-      <div class="options">
-        <el-button @click="goBack">{{$t('common.cancelButton')}}</el-button>
-      </div>
+      <!-- <el-page-header  :content="'接口预览 - ' + title" /> -->
+
     </div>
     <el-form ref="dataForm" class="main" label-position="top" v-loading="formLoading">
       <el-form-item label="Request URL">
@@ -15,7 +13,7 @@
           </template>
         </el-input>
       </el-form-item>
-      <el-form-item label="Request Param" v-if="inputList.length>0">
+      <el-form-item label="Request Param" v-if="inputList.length > 0">
         <el-row v-for="(item, index) in inputList" :key="index" :gutter="20" class="mt-10">
           <el-col :span="6">
             <el-input v-model="item.field" placeholder="key" clearable readonly />
@@ -29,11 +27,14 @@
         <el-input v-model="responseData" type="textarea" :autosize="{ minRows: 20 }" />
       </el-form-item>
     </el-form>
+    <div class="options" style="display: flex;justify-content: flex-end;">
+      <el-button @click="goBack">{{ $t('common.cancelButton') }}</el-button>
+    </div>
   </div>
 </template>
 
 <script>
-import {getDIFP} from "@/api/portal";
+import { getDIFP } from "@/api/portal";
 
 export default {
   data() {
@@ -60,7 +61,7 @@ export default {
         origin: 'preview'
       }
       getDIFP(this.id, query).then(res => {
-        alert(2)
+        // alert(2)
         this.testLoading = false
         let data = res
         this.responseData = JSON.stringify(data, null, 4)

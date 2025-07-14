@@ -17,6 +17,7 @@ export default {
     let noPropList = list.filter(item => item.componentOptions && item.componentOptions.propsData && !item.componentOptions.propsData.prop)
     let noPropList1 = noPropList.filter(item => item.componentOptions.propsData.label !== '操作')
     let noPropList2 = noPropList.filter(item => item.componentOptions.propsData.label === '操作')
+    console.log(noPropList, noPropList1, noPropList2, '========================================')
     return [...noPropList1, ...slots, ...noPropList2]
   }
 }

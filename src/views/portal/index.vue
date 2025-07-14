@@ -2,74 +2,75 @@
   <div class="JNPF-common-layout">
     <div class="JNPF-common-layout-center">
       <el-row class="JNPF-common-search-box" :gutter="16">x`
-<!--        <el-form @submit.native.prevent>-->
-<!--          <el-col :span="6">-->
-<!--            <el-form-item label="关键词">-->
-<!--              <el-input v-model="keyword" placeholder="请输入关键词查询" clearable-->
-<!--                        @keyup.enter.native="search()"/>-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
-<!--          <el-col :span="6">-->
-<!--            <el-form-item label="分类">-->
-<!--              <el-select v-model="category" placeholder="请选择分类" clearable filterable>-->
-<!--                <el-option v-for="item in categoryList" :key="item.id" :label="item.fullName"-->
-<!--                           :value="item.id">-->
-<!--                </el-option>-->
-<!--              </el-select>-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
-<!--          <el-col :span="6">-->
-<!--            <el-form-item label="类型">-->
-<!--              <el-select v-model="type" placeholder="请选择类型" clearable>-->
-<!--                <el-option label="配置路径" :value="1"/>-->
-<!--                <el-option label="门户设计" :value="0"/>-->
-<!--              </el-select>-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
-<!--          <template v-if="showAll">-->
-<!--            <el-col :span="6">-->
-<!--              <el-form-item label="锁定">-->
-<!--                <el-select v-model="enabledLock" placeholder="请选择锁定类型" clearable>-->
-<!--                  <el-option label="是" :value="1"/>-->
-<!--                  <el-option label="否" :value="0"/>-->
-<!--                </el-select>-->
-<!--              </el-form-item>-->
-<!--            </el-col>-->
-<!--          </template>-->
-<!--          <el-col :span="6">-->
-<!--            <el-form-item>-->
-<!--              <el-button type="primary" icon="el-icon-search" @click="search()">-->
-<!--                {{ $t('common.search') }}-->
-<!--              </el-button>-->
-<!--              <el-button icon="el-icon-refresh-right" @click="reset()">{{ $t('common.reset') }}-->
-<!--              </el-button>-->
-<!--              <el-button type="text" icon="el-icon-arrow-down" @click="showAll=true"-->
-<!--                         v-if="!showAll">展开-->
-<!--              </el-button>-->
-<!--              <el-button type="text" icon="el-icon-arrow-up" @click="showAll=false" v-else>-->
-<!--                收起-->
-<!--              </el-button>-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
-<!--        </el-form>-->
+        <!--        <el-form @submit.native.prevent>-->
+        <!--          <el-col :span="6">-->
+        <!--            <el-form-item label="关键词">-->
+        <!--              <el-input v-model="keyword" placeholder="请输入关键词查询" clearable-->
+        <!--                        @keyup.enter.native="search()"/>-->
+        <!--            </el-form-item>-->
+        <!--          </el-col>-->
+        <!--          <el-col :span="6">-->
+        <!--            <el-form-item label="分类">-->
+        <!--              <el-select v-model="category" placeholder="请选择分类" clearable filterable>-->
+        <!--                <el-option v-for="item in categoryList" :key="item.id" :label="item.fullName"-->
+        <!--                           :value="item.id">-->
+        <!--                </el-option>-->
+        <!--              </el-select>-->
+        <!--            </el-form-item>-->
+        <!--          </el-col>-->
+        <!--          <el-col :span="6">-->
+        <!--            <el-form-item label="类型">-->
+        <!--              <el-select v-model="type" placeholder="请选择类型" clearable>-->
+        <!--                <el-option label="配置路径" :value="1"/>-->
+        <!--                <el-option label="门户设计" :value="0"/>-->
+        <!--              </el-select>-->
+        <!--            </el-form-item>-->
+        <!--          </el-col>-->
+        <!--          <template v-if="showAll">-->
+        <!--            <el-col :span="6">-->
+        <!--              <el-form-item label="锁定">-->
+        <!--                <el-select v-model="enabledLock" placeholder="请选择锁定类型" clearable>-->
+        <!--                  <el-option label="是" :value="1"/>-->
+        <!--                  <el-option label="否" :value="0"/>-->
+        <!--                </el-select>-->
+        <!--              </el-form-item>-->
+        <!--            </el-col>-->
+        <!--          </template>-->
+        <!--          <el-col :span="6">-->
+        <!--            <el-form-item>-->
+        <!--              <el-button type="primary" icon="el-icon-search" @click="search()">-->
+        <!--                {{ $t('common.search') }}-->
+        <!--              </el-button>-->
+        <!--              <el-button icon="el-icon-refresh-right" @click="reset()">{{ $t('common.reset') }}-->
+        <!--              </el-button>-->
+        <!--              <el-button type="text" icon="el-icon-arrow-down" @click="showAll=true"-->
+        <!--                         v-if="!showAll">展开-->
+        <!--              </el-button>-->
+        <!--              <el-button type="text" icon="el-icon-arrow-up" @click="showAll=false" v-else>-->
+        <!--                收起-->
+        <!--              </el-button>-->
+        <!--            </el-form-item>-->
+        <!--          </el-col>-->
+        <!--        </el-form>-->
       </el-row>
       <div class="JNPF-common-layout-main JNPF-flex-main">
         <div class="JNPF-common-head">
           <topOpts @add="addOrUpdateHandle" addText="新建门户">
-            <upload-btn url="/api/visualdev/Portal/Model/Actions/ImportData" accept=".vp"
-                        @on-success="initData"/>
+            <upload-btn url="/api/visualdev/Portal/Model/Actions/ImportData" accept=".vp" @on-success="initData" />
           </topOpts>
           <div class="JNPF-common-head-right">
             <el-tooltip effect="dark" :content="$t('common.refresh')" placement="top">
-              <el-link icon="icon-ym icon-ym-Refresh JNPF-common-head-icon" :underline="false"
-                       @click="initData()"/>
+              <el-link icon="icon-ym icon-ym-Refresh JNPF-common-head-icon" :underline="false" @click="initData()" />
             </el-tooltip>
           </div>
         </div>
-        <el-table v-loading="listLoading" :data="list">
-          <el-table-column prop="fullName" label="名称" show-overflow-tooltip min-width="200"/>
-          <el-table-column prop="enCode" label="编码" width="200"/>
-          <el-table-column prop="category" label="分类" width="150"/>
+        <el-table class="tableList" v-loading="listLoading" :data="list"  style="padding: 0 20px;">
+          <el-table-column prop="id" label="ID" width="80" />
+          <el-table-column prop="fullName" label="名称" show-overflow-tooltip min-width="160" />
+          
+
+          <el-table-column prop="enCode" label="编码" width="200" />
+          <el-table-column prop="category" label="分类" width="150" />
           <el-table-column prop="type" label="类型" width="100" align="center">
             <template slot-scope="scope">
               <p>{{ scope.row.type == 1 ? '配置路径' : '门户设计' }}</p>
@@ -80,22 +81,19 @@
               <p>{{ scope.row.type == 1 ? '' : scope.row.enabledLock == 1 ? '是' : '否' }}</p>
             </template>
           </el-table-column>
-          <el-table-column prop="CreatorName" label="创建人" width="120"/>
-          <el-table-column prop="CreateTime" label="创建时间" :formatter="jnpf.tableDateFormat"
-                           width="120"/>
-          <el-table-column prop="UpdateTime" label="最后修改时间" :formatter="jnpf.tableDateFormat"
-                           width="120"/>
-          <el-table-column prop="sortCode" label="排序" width="70" align="center"/>
-          <el-table-column prop="isRelease" label="发布状态" width="100" align="center">
+          <el-table-column prop="CreatorName" label="创建人" width="120" />
+          <el-table-column prop="CreateTime" label="创建时间" :formatter="jnpf.tableDateFormat" width="140" />
+          <el-table-column prop="UpdateTime" label="最后修改时间" :formatter="jnpf.tableDateFormat" width="140" />
+          <el-table-column prop="sortCode" label="排序" width="70" align="center" />
+          <el-table-column prop="isRelease" label="发布状态" width="120" align="center">
             <template slot-scope="scope">
-              <el-tag
-                  :type="scope.row.isRelease == 1 ? 'success' :scope.row.isRelease == 2?'warning': 'info'"
-                  disable-transitions>
+              <el-tag :type="scope.row.isRelease == 1 ? 'success' : scope.row.isRelease == 2 ? 'warning' : 'info'"
+                disable-transitions>
                 {{ scope.row.isRelease == 1 ? '已发布' : scope.row.isRelease == 2 ? '已修改' : '未发布' }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="操作" fixed="right" width="150">
+          <el-table-column label="操作" fixed="right" width="180">
             <template slot-scope="scope">
               <tableOpts @edit="addOrUpdateHandle(scope.row.id)" @del="handleDel(scope.row.id)">
                 <el-dropdown>
@@ -108,12 +106,12 @@
                     <el-dropdown-item @click.native="openReleaseDialog(scope.row)">
                       发布
                     </el-dropdown-item>
-                    <el-dropdown-item v-if="scope.row.type==0" @click.native="design(scope.row)">设计
+                    <el-dropdown-item v-if="scope.row.type == 0" @click.native="design(scope.row)">设计
                     </el-dropdown-item>
-                    <el-dropdown-item @click.native="preview(scope.row.id,2)">预览</el-dropdown-item>
-<!--                    <el-dropdown-item @click.native="copy(scope.row.id)">复制</el-dropdown-item>-->
-<!--                    <el-dropdown-item @click.native="exportTemplate(scope.row.id)">导出-->
-<!--                    </el-dropdown-item>-->
+                    <el-dropdown-item @click.native="preview(scope.row.id, 2)">预览</el-dropdown-item>
+                    <!--                    <el-dropdown-item @click.native="copy(scope.row.id)">复制</el-dropdown-item>-->
+                    <!--                    <el-dropdown-item @click.native="exportTemplate(scope.row.id)">导出-->
+                    <!--                    </el-dropdown-item>-->
                   </el-dropdown-menu>
                 </el-dropdown>
               </tableOpts>
@@ -121,16 +119,16 @@
           </el-table-column>
 
         </el-table>
-        <pagination :total="total" :page.sync="listQuery.currentPage"
-                    :limit.sync="listQuery.pageSize" @pagination="initData"/>
+        <pagination :total="total" :page.sync="listQuery.currentPage" :limit.sync="listQuery.pageSize"
+          @pagination="initData" />
       </div>
     </div>
-    <Form v-if="formVisible" ref="form" @close="closeForm" @initPortalDesign="design"/>
-    <PortalDesign v-if="portalDesignVisible" ref="portalDesign" @close="closeForm1"/>
-    <Preview :visible.sync="previewVisible" :id="currId"/>
-    <ReleaseDialog :visible.sync="releaseDialog" ref="release" @release="search()"/>
-    <previewDialog :visible.sync="previewTypeVisible" :id="currId" :previewType="previewType"
-                   type="portal" @previewPc='previewPc'/>
+    <Form v-if="formVisible" ref="form" @close="closeForm" @initPortalDesign="design" />
+    <PortalDesign v-if="portalDesignVisible" ref="portalDesign" @close="closeForm1" />
+    <Preview :visible.sync="previewVisible" :id="currId" />
+    <ReleaseDialog :visible.sync="releaseDialog" ref="release" @release="search()" />
+    <previewDialog :visible.sync="previewTypeVisible" :id="currId" :previewType="previewType" type="portal"
+      @previewPc='previewPc' />
   </div>
 </template>
 
@@ -141,11 +139,11 @@ import PortalDesign from '@/components/VisualPortal/PortalDesign'
 import previewDialog from '@/components/PreviewDialog'
 import Preview from './IndexPreview'
 import ReleaseDialog from './releaseDialog'
-import {loginJk , getPortalList , Delete} from '@/api/portal'
+import { loginJk, getPortalList, Delete } from '@/api/portal'
 
 export default {
   name: 'portal',
-  components: {Form, PortalDesign, previewDialog, Preview, ReleaseDialog},
+  components: { Form, PortalDesign, previewDialog, Preview, ReleaseDialog },
   data() {
     return {
       list: [],
@@ -210,13 +208,13 @@ export default {
         enabledLock: this.enabledLock
       }
       // getPortalList(query).then(res => {
-      loginJk().then(res=> {
+      loginJk().then(res => {
         let BearerToken = res.data.BearerToken
         localStorage.setItem('Authorization', BearerToken)
       })
 
       getPortalList().then(res => {
-        this.list = res.data.data.list
+        this.list = res.data.data.list.sort((a,b) => { return a.sortCode - b.sortCode })
         this.total = res.data.data.pagination.total
         this.listLoading = false
       })
@@ -307,3 +305,14 @@ export default {
   }
 }
 </script>
+<style>
+  /* .tableList.el-table tr, .tableList.el-table thead th, .tableList.el-table {
+    background-color: #202023 !important;
+  }
+  .tableList.el-table {
+    background-color: transparent !important;
+  } */
+  .pagination-container {
+    padding: 5px 10px !important;
+  }
+</style>

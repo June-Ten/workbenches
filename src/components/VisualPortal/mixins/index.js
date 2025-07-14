@@ -26,6 +26,7 @@ export default {
     }
   },
   mounted() {
+    console.log('activeData', this.activeData)
     if (this.activeData.dataType === 'dynamic') {
       if (!this.activeData.propsApi) return
       getDataInterfaceRes(this.activeData.propsApi).then(res => {

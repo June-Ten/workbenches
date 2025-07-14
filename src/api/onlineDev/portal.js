@@ -66,13 +66,7 @@ export const getPortalXXInfo = (data) => request({
 //     data
 //   })
 // }
-// // 复制门户
-// export function Copy(id) {
-//   return request({
-//     url: `/api/visualdev/Portal/${id}/Actions/Copy`,
-//     method: 'POST'
-//   })
-// }
+  
 // // 导出门户
 // export function exportTemplate(id) {
 //   return request({

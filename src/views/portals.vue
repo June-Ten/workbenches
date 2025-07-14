@@ -21,19 +21,18 @@
   <!--    </div>-->
   <!--  </el-dialog>-->
 
-  <div class="main" style="padding:0" v-loading="loading">
-<!--    <div class="custom-page" v-if="type===1">-->
-<!--      <component :is="currentView" v-if="linkType===0"/>-->
-<!--      <embed :src="url" width="100%" height="100%" type="text/html" v-if="linkType===1"/>-->
-<!--    </div>-->
-    <PortalLayout :layout="layout" mask v-if="type===0"/>
+  <div style="width:100%; height:100%;overflow:scroll">
+    <div class="main" style="padding:0" v-loading="loading">
+      <PortalLayout :layout="layout" mask v-if="type===0" />
+    </div>
   </div>
+
 </template>
 
 <script>
 import {getPortalXXInfo} from '@/api/onlineDev/portal'
 import PortalLayout from '@/components/VisualPortal/Layout'
-import { getSearchParams } from '../utils/utils'
+import {getSearchParams} from '../utils/utils'
 
 export default {
   props: ['id'],
@@ -60,7 +59,7 @@ export default {
     },
     onOpen() {
       let Kvid = getSearchParams().id;
-      console.log("---"+Kvid);
+      console.log("---" + Kvid);
       this.id = Kvid
       this.loading = true
       this.layout = []

@@ -20,57 +20,55 @@
     <!--      </el-scrollbar>-->
     <!--    </div>-->
     <div class="JNPF-common-layout-center">
-<!--      <el-row class="JNPF-common-search-box" :gutter="16">-->
-<!--        <el-form @submit.native.prevent>-->
-<!--          <el-col :span="6">-->
-<!--            <el-form-item label="关键词">-->
-<!--              <el-input v-model="listQuery.keyword" placeholder="请输入关键词查询" clearable-->
-<!--                        @keyup.enter.native="search()"/>-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
-<!--          <el-col :span="6">-->
-<!--            <el-form-item>-->
-<!--              <el-button type="primary" icon="el-icon-search" @click="search()">-->
-<!--                {{ $t('common.search') }}-->
-<!--              </el-button>-->
-<!--              <el-button icon="el-icon-refresh-right" @click="reset()">{{ $t('common.reset') }}-->
-<!--              </el-button>-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
-<!--        </el-form>-->
-<!--      </el-row>-->
+      <!--      <el-row class="JNPF-common-search-box" :gutter="16">-->
+      <!--        <el-form @submit.native.prevent>-->
+      <!--          <el-col :span="6">-->
+      <!--            <el-form-item label="关键词">-->
+      <!--              <el-input v-model="listQuery.keyword" placeholder="请输入关键词查询" clearable-->
+      <!--                        @keyup.enter.native="search()"/>-->
+      <!--            </el-form-item>-->
+      <!--          </el-col>-->
+      <!--          <el-col :span="6">-->
+      <!--            <el-form-item>-->
+      <!--              <el-button type="primary" icon="el-icon-search" @click="search()">-->
+      <!--                {{ $t('common.search') }}-->
+      <!--              </el-button>-->
+      <!--              <el-button icon="el-icon-refresh-right" @click="reset()">{{ $t('common.reset') }}-->
+      <!--              </el-button>-->
+      <!--            </el-form-item>-->
+      <!--          </el-col>-->
+      <!--        </el-form>-->
+      <!--      </el-row>-->
       <div class="JNPF-common-layout-main JNPF-flex-main">
         <div class="JNPF-common-head">
           <topOpts @add="addOrUpdateHandle()">
-            <upload-btn url="/api/system/DataInterface/Actions/Import" accept=".bd"
-                        @on-success="getList"/>
+            <upload-btn url="/api/system/DataInterface/Actions/Import" accept=".bd" @on-success="getList" />
           </topOpts>
           <div class="JNPF-common-head-right">
             <el-tooltip effect="dark" :content="$t('common.refresh')" placement="top">
-              <el-link icon="icon-ym icon-ym-Refresh JNPF-common-head-icon" :underline="false"
-                       @click="getList()"/>
+              <el-link icon="icon-ym icon-ym-Refresh JNPF-common-head-icon" :underline="false" @click="getList()" />
             </el-tooltip>
           </div>
         </div>
         <JNPF-table v-loading="listLoading" :data="tableData">
-          <el-table-column prop="fullName" label="名称"/>
-          <el-table-column prop="enCode" label="编码"/>
-          <el-table-column prop="dataType" label="类型" width="100">
+          <el-table-column prop="fullName" label="名称" min-width="120" />
+          <el-table-column prop="enCode" label="编码" min-width="120" />
+          <el-table-column prop="dataType" label="类型" min-width="100">
             <template slot-scope="scope">
-              <span>{{ scope.row.type }}</span>
+              <span>{{ scope.row.type == '' ? '' : scope.row.type == 1 ? '静态数据' : (scope.row.type == 2 ? 'SQL操作' :
+            'API操作') }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="creatorTime" label="创建时间" :formatter="jnpf.tableDateFormat"
-                           width="120"/>
-          <el-table-column prop="sortCode" label="排序" width="70" align="center"/>
-          <el-table-column prop="enabledMark" label="状态" width="70" align="center">
+          <el-table-column prop="creatorTime" label="创建时间" :formatter="jnpf.tableDateFormat" min-width="120" />
+          <el-table-column prop="sortCode" label="排序" min-width="70" align="center" />
+          <el-table-column prop="enabledMark" label="状态" min-width="70" align="center">
             <template slot-scope="scope">
               <el-tag :type="scope.row.enabledMark == 1 ? 'success' : 'danger'" disable-transitions>
                 {{ scope.row.enabledMark == 1 ? '启用' : '禁用' }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="操作" width="150">
+          <el-table-column label="操作" width="180">
             <template slot-scope="scope">
               <tableOpts @edit="addOrUpdateHandle(scope.row.id)" @del="handleDel(scope.row.id)">
                 <el-dropdown hide-on-click>
@@ -81,25 +79,32 @@
                   </span>
                   <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item @click.native="handlePreview(scope.row)">预览</el-dropdown-item>
-<!--                    <el-dropdown-item @click.native="handleCopy(scope.row.id)">复制</el-dropdown-item>-->
-<!--                    <el-dropdown-item @click.native="exportData(scope.row.id)">导出</el-dropdown-item>-->
-<!--                    <el-dropdown-item @click.native="variableData(scope.row.id)"-->
-<!--                                      v-if="scope.row.isPostPosition == 1">变量-->
-<!--                    </el-dropdown-item>-->
+                    <!--                    <el-dropdown-item @click.native="handleCopy(scope.row.id)">复制</el-dropdown-item>-->
+                    <!--                    <el-dropdown-item @click.native="exportData(scope.row.id)">导出</el-dropdown-item>-->
+                    <!--                    <el-dropdown-item @click.native="variableData(scope.row.id)"-->
+                    <!--                                      v-if="scope.row.isPostPosition == 1">变量-->
+                    <!--                    </el-dropdown-item>-->
                   </el-dropdown-menu>
                 </el-dropdown>
               </tableOpts>
             </template>
           </el-table-column>
         </JNPF-table>
-        <pagination :total="total" :page.sync="listQuery.currentPage"
-                    :limit.sync="listQuery.pageSize" @pagination="getList"/>
+        <pagination :total="total" :page.sync="listQuery.currentPage" :limit.sync="listQuery.pageSize"
+          @pagination="getList" />
       </div>
     </div>
-    <Form v-if="formVisible" ref="Form" @close="closeForm"/>
-    <Log v-show="logVisible" ref="Log" @close="logVisible=false"/>
-    <Preview v-if="previewVisible" ref="Preview" @close="closePreview"/>
-    <Variable v-if="isVisible" ref="variable" @close="closeVariable"/>
+    <el-dialog :visible.sync="formVisible" width="80%">
+      <Form  ref="Form" @close="closeForm" />
+    </el-dialog>
+
+    <el-dialog :title="'接口预览' + fullName" :visible.sync="previewVisible" width="80%">
+      <Preview ref="Preview" @close="closePreview" />
+    </el-dialog>
+    
+    <Log v-show="logVisible" ref="Log" @close="logVisible = false" />
+    
+    <Variable v-if="isVisible" ref="variable" @close="closeVariable" />
   </div>
 </template>
 <script>
@@ -108,11 +113,11 @@ import Form from './Form'
 import Preview from './Preview'
 import Variable from './components/variable/index.vue'
 import Log from './Log'
-import {getDIFList, loginJk , delDIF} from "@/api/portal";
+import { getDIFList, loginJk, delDIF } from "@/api/portal";
 
 export default {
   name: 'systemData-dataInterface',
-  components: {Form, Preview, Log, Variable},
+  components: { Form, Preview, Log, Variable },
   data() {
     return {
       defaultProps: {
@@ -138,6 +143,8 @@ export default {
       isVisible: false,
       expandsTree: true,
       refreshTree: true,
+      dialogVisible: true,
+      fullName: ''
     }
   },
   created() {
@@ -145,7 +152,7 @@ export default {
   },
   methods: {
     initData() {
-     this.getList()
+      this.getList()
       // this.treeLoading = true
       // // this.$store.dispatch('base/getDictionaryData', { sort: 'DataInterfaceType' }).then((res) => {
       // //   this.treeData = res
@@ -246,7 +253,8 @@ export default {
       })
     },
     handlePreview(row) {
-      const {id, enabledMark, tenantId, fullName} = row
+      const { id, enabledMark, tenantId, fullName } = row;
+      this.fullName = fullName;
       if (enabledMark === 0) {
         this.$message.error('接口已被禁用，请先开启接口')
       } else {
@@ -320,3 +328,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.pagination-container {
+  padding: 5px 10px !important;
+}
+</style>

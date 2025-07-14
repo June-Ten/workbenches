@@ -251,6 +251,7 @@ export default {
     openReleaseDialog(row) {
       this.$nextTick(() => {
         this.releaseDialog = true
+        console.log(row, '===============')
         this.$refs.release.openRelease(row)
       })
     },

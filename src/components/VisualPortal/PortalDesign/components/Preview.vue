@@ -32,6 +32,7 @@ export default {
     onOpen() {
       this.showPortalLayout = true
       this.layoutData = this.filterList(JSON.parse(JSON.stringify(this.layout)))
+      console.log(this.layoutData, 1111111)
     },
     filterList(layout) {
       const loop = list => {

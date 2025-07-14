@@ -1,13 +1,8 @@
 <template>
   <div class="nav-main">
-    <canvas id="nav-canvas"
-            style="position: absolute; z-index: -1; left: 0;"></canvas>
-    <span v-for="(item,index) in navs"
-          :key="index"
-          class="nav-span">
-      <a class="nav-link"
-         :class="{ 'nav-active': index === activeIndex }"
-         @click="toggleNav(item,index)">
+    <canvas id="nav-canvas" style="position: absolute; z-index: -1; left: 0;"></canvas>
+    <span v-for="(item, index) in navs" :key="index" class="nav-span">
+      <a class="nav-link" :class="{ 'nav-active': index === activeIndex }" @click="toggleNav(item, index)">
         <i :class="item.icon"></i>
         {{ item.name }}
       </a>
@@ -19,15 +14,15 @@
 import { NavCanvas } from "./nav-canvas";
 
 export default {
-  data () {
+  data() {
     return {
       nc: null,
       navs: [
-        {
-          icon: 'el-icon-menu',
-          name: '大屏管理',
-          path: '/'
-        },
+        // {
+        //   icon: 'el-icon-menu',
+        //   name: '大屏管理',
+        //   path: '/'
+        // },
         // {
         //   icon: 'el-icon-location-information',
         //   name: '地图管理',
@@ -38,25 +33,25 @@ export default {
         //   name: '分类管理',
         //   path: '/category'
         // },
-      //   {
-      //   icon: 'el-icon-set-up',
-      //   name: '数据源管理',
-      //   path: '/db'
-      // },
-      //   {
-      //     icon: 'el-icon-suitcase',
-      //     name: '数据集管理',
-      //     path: '/record'
-      //   },
-      //   {
-      //     icon: 'el-icon-eleme',
-      //     name: '组件库',
-      //     path: '/components'
-      //   }, {
-      //     icon: 'el-icon-thumb',
-      //     name: '综合功能',
-      //     path: '/document'
-      //   },
+        //   {
+        //   icon: 'el-icon-set-up',
+        //   name: '数据源管理',
+        //   path: '/db'
+        // },
+        //   {
+        //     icon: 'el-icon-suitcase',
+        //     name: '数据集管理',
+        //     path: '/record'
+        //   },
+        //   {
+        //     icon: 'el-icon-eleme',
+        //     name: '组件库',
+        //     path: '/components'
+        //   }, {
+        //     icon: 'el-icon-thumb',
+        //     name: '综合功能',
+        //     path: '/document'
+        //   },
         {
           icon: 'el-icon-thumb',
           name: '门户设计',
@@ -72,7 +67,7 @@ export default {
       activeIndex: 0,
     }
   },
-  mounted () {
+  mounted() {
     this.navs = this.navs.filter((ele, index) => {
       return this.$website.tabsList.includes(index)
     })
@@ -82,7 +77,7 @@ export default {
     this.nc = new NavCanvas("nav-canvas", ".nav-main .nav-span", this.activeIndex);
   },
   methods: {
-    toggleNav (nav, index) {
+    toggleNav(nav, index) {
       this.activeNav = nav;
       this.activeIndex = index;
       this.nc.toggle(this.activeIndex)
@@ -101,6 +96,7 @@ export default {
   width: 100%;
   user-select: none;
   height: 50px;
+
   .nav-span {
     .nav-link {
       transition: color 0.2s;

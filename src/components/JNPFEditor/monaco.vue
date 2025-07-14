@@ -1,5 +1,5 @@
 <template>
-  <div class="monaco-container" ref="codeEditor"></div>
+  <div class="monaco-container" style="height: 150px;" ref="codeEditor"></div>
 </template>
 <script>
 import * as monaco from "monaco-editor"

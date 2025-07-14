@@ -1,6 +1,6 @@
 <template>
   <div class="JNPF-common-layout JNPF-flex-main">
-    <div class="JNPF-common-layout-center">
+    <div class="">
       <el-row class="JNPF-common-search-box" :gutter="16">
         <el-form @submit.native.prevent>
           <el-col :span="6">
